@@ -4,22 +4,19 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private Animator animator;
-    private Collider2D[] colliders;
-    private PlayerMovement playerMovement;
-    private Rigidbody2D rb;
+    private Rigidbody2D rigidBody2D;
 
-    public int healthPoints = 3;
+    public int healthPoints = 3; //Очки здоровья игрока
     private bool damaging = false;
+    private Vector2 lastJump=new Vector2(0,700);//Сила с которой игрок полетит вверх после смерти
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        colliders = GetComponents<Collider2D>();
-        playerMovement = GetComponent<PlayerMovement>();
-        rb = GetComponent<Rigidbody2D>();
-        
-
+        rigidBody2D = GetComponent<Rigidbody2D>();
     }
+    
+    //Нанесение урона игроку
     public void Damage()
     {
         if (!damaging)
@@ -38,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    //Временная неуязвимость после урона
     private IEnumerator TemporaryImmortality()
     {
         Physics2D.IgnoreLayerCollision(8, 9, true);
@@ -49,14 +47,16 @@ public class PlayerHealth : MonoBehaviour
         damaging = false;
     }
 
+    //Уничтожение игрока при очках здоровья равных нулю
     private IEnumerator DelayedDestruction()
     {
-        playerMovement.dead = true;
-        playerMovement.horizontalMove = 0;
+        gameObject.GetComponent<PlayerMovement>().enabled = false;
+        gameObject.GetComponent<PlayerMovement>().horizontalMove = 0;
+        rigidBody2D.velocity = Vector2.zero;
         animator.SetBool("IsDead", true);
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(1);
-        rb.AddForce(new Vector2(0f, 700));
+        rigidBody2D.AddForce(lastJump);
         Physics2D.IgnoreLayerCollision(8, 11, true);
         yield return new WaitForSeconds(5);
         Destroy(gameObject);

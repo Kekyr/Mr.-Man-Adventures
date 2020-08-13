@@ -3,28 +3,31 @@ using UnityEngine;
 
 public class RollingNeroMovement : MonoBehaviour
 {
-    [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;
-    [SerializeField] private float rollSpeed = 10f;
+    public Rigidbody2D rigidBody2D;
+    private Animator animator;
+    private Common common;
 
-    private bool facingRight = false;
+    [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;//Сглаживание передвижения
+    [SerializeField] private float rollSpeed = 10f;//Скорость передвижения
+    private bool facingRight = false;//Направление спрайта
     private Vector3 velocity = Vector3.zero;
     private Vector3 startPosition;
     private Vector3 firstDestination;
     private Vector3 secondDestination;
     private Vector3 currentDestination;
+    public Vector3 targetVelocity;
 
-    private Rigidbody2D rb;
-    private Animator animator;
+   
 
     private void Awake()
     {
+        common = FindObjectOfType<Common>();
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        startPosition = this.transform.position+new Vector3(0.5f,0);
+        rigidBody2D = GetComponent<Rigidbody2D>();
+        startPosition = this.transform.position + new Vector3(0.5f, 0);
         firstDestination = startPosition + new Vector3(5.3f, 0);
         secondDestination = startPosition + new Vector3(10f, 0);
         currentDestination = firstDestination;
-
     }
 
     private void Start()
@@ -32,34 +35,40 @@ public class RollingNeroMovement : MonoBehaviour
         StartCoroutine(Move());
     }
 
+    //Передвижение Rolling Nero
     private IEnumerator Move()
     {
         while (true)
         {
-            Vector3 targetVelocity = new Vector2(rollSpeed, rb.velocity.y);
-
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
-
-            
-            if (rb.position.x>currentDestination.x && rollSpeed>0)
+            if (!enabled)
             {
-                rb.velocity = Vector3.zero;
-                animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
-                if (currentDestination== firstDestination)
+                yield break;
+            }
+
+            targetVelocity = new Vector2(rollSpeed, rigidBody2D.velocity.y);
+
+            rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing);
+
+
+            if (rigidBody2D.position.x > currentDestination.x && rollSpeed > 0)
+            {
+                rigidBody2D.velocity = Vector3.zero;
+                animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
+                if (currentDestination == firstDestination)
                 {
                     currentDestination = secondDestination;
                 }
-                else if(currentDestination== secondDestination)
+                else if (currentDestination == secondDestination)
                 {
                     currentDestination = firstDestination;
                     rollSpeed *= -1;
                 }
-                yield return new WaitForSeconds(5); 
+                yield return new WaitForSeconds(5);
             }
-            else if(rb.position.x<currentDestination.x && rollSpeed<0)
+            else if (rigidBody2D.position.x < currentDestination.x && rollSpeed < 0)
             {
-                rb.velocity = Vector3.zero;
-                animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+                rigidBody2D.velocity = Vector3.zero;
+                animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
                 if (currentDestination == firstDestination)
                 {
                     currentDestination = startPosition;
@@ -74,29 +83,18 @@ public class RollingNeroMovement : MonoBehaviour
 
             if (rollSpeed > 0 && !facingRight)
             {
-                Flip();
+                common.Flip(ref facingRight, gameObject);
             }
 
             else if (rollSpeed < 0 && facingRight)
             {
-                Flip();
+                common.Flip(ref facingRight, gameObject);
             }
 
-            animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+            animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
 
             yield return null;
+
         }
-
     }
-
-    private void Flip()
-    {
-        facingRight = !facingRight;
-
-        
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-    }
-
 }

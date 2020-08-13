@@ -2,7 +2,7 @@
 
 public class NeroColliderBridge : MonoBehaviour
 {
-    private NeroColliderListener _listener;
+    private NeroColliderListener _listener; //Родитель всех gameobject
     public void Initialize(NeroColliderListener l)
     {
         _listener = l;
