@@ -197,8 +197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a655cb947365744b7cc8b16976272e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidBody2D: {fileID: 0}
   movementSmoothing: 0.05
-  animator: {fileID: 6927594032992846552}
+  rollSpeed: 10
+  targetVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &6927594032992846559
 MonoBehaviour:
   m_ObjectHideFlags: 0

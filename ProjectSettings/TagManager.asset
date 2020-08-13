@@ -8,6 +8,7 @@ TagManager:
   - Body
   - Fist
   - Top
+  - GameManager
   layers:
   - Default
   - TransparentFX

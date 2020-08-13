@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class NeroColliderListener : MonoBehaviour
 {
-    public string currentTag;
+    public string currentTag;//Тэг сработавшего коллайдера
+
+    //Подключение коллайдеров детей
     private void Awake()
     {
         var colliders = GetComponentsInChildren<Collider2D>();
@@ -16,14 +18,15 @@ public class NeroColliderListener : MonoBehaviour
             }
         }
     }
+
+    //Взаимодействие с Rolling Nero
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             if (currentTag == "Head")
             {
-                Debug.Log("Head Collider");
-                Destroy(gameObject);
+                StartCoroutine(DelayedDestruction(collision));
             }
             else if (currentTag == "Top")
             {
@@ -39,7 +42,17 @@ public class NeroColliderListener : MonoBehaviour
         
     }
 
-    
+    //Уничтожение врага (Rolling Nero) после атаки сверху
+    private IEnumerator DelayedDestruction(Collision2D collision)
+    {
+        gameObject.GetComponent<Animator>().SetBool("IsSquished", true);
+        gameObject.GetComponent<RollingNeroMovement>().enabled = false;
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+    }
+
+
 
 }
 

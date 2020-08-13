@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerColliderBridge : MonoBehaviour
 {
-    PlayerColliderListener _listener;
+    PlayerColliderListener _listener; //Родитель всех gameobject
     public void Initialize(PlayerColliderListener l)
     {
         _listener = l;
