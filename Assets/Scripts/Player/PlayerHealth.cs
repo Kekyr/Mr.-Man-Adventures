@@ -58,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(1);
         rigidBody2D.AddForce(lastJump);
         Physics2D.IgnoreLayerCollision(8, 11, true);
+        Physics2D.IgnoreLayerCollision(8, 12, true);
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }

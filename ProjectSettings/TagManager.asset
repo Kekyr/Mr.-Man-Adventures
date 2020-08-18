@@ -9,6 +9,7 @@ TagManager:
   - Fist
   - Top
   - GameManager
+  - ChiChi
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Player
   - Enemy
   - Objects
-  - Ground
-  - 
+  - Floor
+  - Platforms
   - 
   - 
   - 

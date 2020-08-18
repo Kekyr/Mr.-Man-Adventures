@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class NeroColliderListener : MonoBehaviour
 {
+    public PlayerHealth playerHealth;
     public string currentTag;//Тэг сработавшего коллайдера
+    
 
     //Подключение коллайдеров детей
     private void Awake()
@@ -31,12 +33,12 @@ public class NeroColliderListener : MonoBehaviour
             else if (currentTag == "Top")
             {
                 Debug.Log("Top Collider");
-                collision.gameObject.GetComponent<PlayerHealth>().Damage();
+                playerHealth.Damage();
             }
             else if(currentTag=="Body")
             {
                 Debug.Log("Body Collider");
-                collision.gameObject.GetComponent<PlayerHealth>().Damage();
+                playerHealth.Damage();
             }
         }
         
