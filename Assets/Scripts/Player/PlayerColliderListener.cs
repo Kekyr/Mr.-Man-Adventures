@@ -23,18 +23,35 @@ public class PlayerColliderListener : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Body"))
         {
+            StartCoroutine(DelayedParentDestruction(collision));
+        }
+        else if(collision.gameObject.CompareTag("ChiChi"))
+        {
             StartCoroutine(DelayedDestruction(collision));
         }
+        
     }
 
-    //Уничтожение врага (Rolling Nero) после удара кулаком
+    //Уничтожение врага (ChiChi) после удара кулаком
     private IEnumerator DelayedDestruction(Collider2D collision)
+    {
+        collision.gameObject.GetComponent<Animator>().SetBool("IsDead", true);
+        collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
+        collision.gameObject.GetComponent<ChiChiMovement>().enabled = false;
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        yield return new WaitForSeconds(5);
+        Destroy(collision.gameObject);
+        
+    }
+    
+    //Уничтожение врага (Rolling Nero) после удара кулаком
+    private IEnumerator DelayedParentDestruction(Collider2D collision)
     {
         collision.gameObject.GetComponentInParent<Animator>().SetBool("IsDead", true);
         collision.gameObject.GetComponentInParent<RollingNeroMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
-        Destroy(collision.gameObject.transform.parent.gameObject);
+        Destroy(collision.gameObject.transform.parent.gameObject); 
     }
 
 

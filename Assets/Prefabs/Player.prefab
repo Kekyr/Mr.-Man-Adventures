@@ -225,7 +225,7 @@ MonoBehaviour:
         m_CallState: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6144
   groundCheck: {fileID: 1937450932471679507}
   jumpForce: 700
   movementSmoothing: 0.05
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff14677a0bc60844ab0efda786550675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 3
+  healthPoints: 1
 --- !u!95 &1937450932676944322
 Animator:
   serializedVersion: 3

@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Chi Chi\ChiChiCollider.cs" />
+    <Compile Include="Assets\Scripts\Chi Chi\ChiChiColliderListener.cs" />
+    <Compile Include="Assets\Scripts\Chi Chi\ChiChiMovement.cs" />
     <Compile Include="Assets\Scripts\Other\Common.cs" />
     <Compile Include="Assets\Scripts\Player\CharacterController2D.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerColliderBridge.cs" />
@@ -76,6 +79,7 @@
     <None Include="Assets\Sprites\Characters\Sprite Pack 5\LICENSE.txt" />
     <None Include="Assets\Sprites\Characters\Sprite Pack 2\LICENSE.txt" />
     <None Include="Assets\Sprites\Characters\Sprite Pack 3\LICENSE.txt" />
+    <None Include="Assets\Plans\Plans.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -258,6 +262,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>C:/Mr. Man Adventures/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -686,7 +693,20 @@
       <HintPath>C:/Mr. Man Adventures/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{B91555BB-7F2B-A7C0-D2AD-BA5E589FA95E}</Project>
+      <Name>AstarPathfindingProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="PackageToolsEditor.csproj">
+      <Project>{8033893C-B92A-B9EC-A5D3-D1058ABF5B98}</Project>
+      <Name>PackageToolsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
+      <Project>{CFCE75C3-8E8D-2BC1-ED30-A4815F5D8C2D}</Project>
+      <Name>AstarPathfindingProjectEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
