@@ -79,6 +79,8 @@
     <None Include="Assets\Sprites\Characters\Sprite Pack 5\LICENSE.txt" />
     <None Include="Assets\Sprites\Characters\Sprite Pack 2\LICENSE.txt" />
     <None Include="Assets\Sprites\Characters\Sprite Pack 3\LICENSE.txt" />
+    <None Include="Assets\Plans\Диздок.txt" />
+    <None Include="Assets\Plans\Фичи.txt" />
     <None Include="Assets\Plans\Plans.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

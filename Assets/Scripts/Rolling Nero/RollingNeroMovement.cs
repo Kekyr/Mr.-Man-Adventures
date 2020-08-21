@@ -8,7 +8,8 @@ public class RollingNeroMovement : MonoBehaviour
     private Common common;
 
     [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;//Сглаживание передвижения
-    [SerializeField] private float rollSpeed = 10f;//Скорость передвижения
+    [SerializeField] public float rollSpeed = 10f;//Скорость передвижения
+    public bool stopped = false;
     private bool facingRight = false;//Направление спрайта
     private Vector3 velocity = Vector3.zero;
     private Vector3 startPosition;
@@ -40,60 +41,70 @@ public class RollingNeroMovement : MonoBehaviour
     {
         while (true)
         {
-            if (!enabled)
-            {
-                yield break;
-            }
+                if (!enabled)
+                {
+                    yield break;
+                }
 
-            targetVelocity = new Vector2(rollSpeed, rigidBody2D.velocity.y);
+                if(stopped)
+                {
+                  rigidBody2D.velocity = Vector3.zero;
+                  rollSpeed *= -1;
+                  animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
+                  yield return new WaitForSeconds(5);
+                  stopped = false;
+                }
 
-            rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing);
+                targetVelocity = new Vector2(rollSpeed, rigidBody2D.velocity.y);
+
+                rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing);
 
 
-            if (rigidBody2D.position.x > currentDestination.x && rollSpeed > 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
+                //if (rigidBody2D.position.x > currentDestination.x && rollSpeed > 0)
+                //{
+                //    rigidBody2D.velocity = Vector3.zero;
+                //    animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
+                //    if (currentDestination == firstDestination)
+                //    {
+                //        currentDestination = secondDestination;
+                //    }
+                //    else if (currentDestination == secondDestination)
+                //    {
+                //        currentDestination = firstDestination;
+                //        rollSpeed *= -1;
+                //    }
+                //    yield return new WaitForSeconds(5);
+                //}
+                //else if (rigidBody2D.position.x < currentDestination.x && rollSpeed < 0)
+                //{
+                //    rigidBody2D.velocity = Vector3.zero;
+                //    animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
+                //    if (currentDestination == firstDestination)
+                //    {
+                //        currentDestination = startPosition;
+                //    }
+                //    else if (currentDestination == startPosition)
+                //    {
+                //        currentDestination = firstDestination;
+                //        rollSpeed *= -1;
+                //    }
+                //    yield return new WaitForSeconds(5);
+                //}
+
+                if (rollSpeed > 0 && !facingRight)
+                {
+                    common.Flip(ref facingRight, gameObject);
+                }
+
+                else if (rollSpeed < 0 && facingRight)
+                {
+                    common.Flip(ref facingRight, gameObject);
+                }
+
                 animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
-                if (currentDestination == firstDestination)
-                {
-                    currentDestination = secondDestination;
-                }
-                else if (currentDestination == secondDestination)
-                {
-                    currentDestination = firstDestination;
-                    rollSpeed *= -1;
-                }
-                yield return new WaitForSeconds(5);
-            }
-            else if (rigidBody2D.position.x < currentDestination.x && rollSpeed < 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
-                if (currentDestination == firstDestination)
-                {
-                    currentDestination = startPosition;
-                }
-                else if (currentDestination == startPosition)
-                {
-                    currentDestination = firstDestination;
-                    rollSpeed *= -1;
-                }
-                yield return new WaitForSeconds(5);
-            }
 
-            if (rollSpeed > 0 && !facingRight)
-            {
-                common.Flip(ref facingRight, gameObject);
-            }
-
-            else if (rollSpeed < 0 && facingRight)
-            {
-                common.Flip(ref facingRight, gameObject);
-            }
-
-            animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
-
-            yield return null;
+                yield return null;
+            
 
         }
     }
