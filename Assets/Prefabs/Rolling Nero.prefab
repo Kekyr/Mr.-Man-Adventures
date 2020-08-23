@@ -200,6 +200,7 @@ MonoBehaviour:
   rigidBody2D: {fileID: 0}
   movementSmoothing: 0.05
   rollSpeed: 10
+  stopped: 0
   targetVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &6927594032992846559
 MonoBehaviour:
@@ -213,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda8a2d1b406e934d84b18003c506d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
   currentTag: 
 --- !u!1 &6927594033820464373
 GameObject:
