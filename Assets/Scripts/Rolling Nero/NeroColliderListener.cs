@@ -39,12 +39,10 @@ public class NeroColliderListener : MonoBehaviour
             }
             else if (currentTag == "Top")
             {
-                Debug.Log("Top Collider");
                 playerHealth.Damage();
             }
             else if(currentTag=="Body")
             {
-                Debug.Log("Body Collider");
                 playerHealth.Damage();
             }
         }
@@ -52,7 +50,6 @@ public class NeroColliderListener : MonoBehaviour
         {
             if (currentTag == "Body")
             {
-                Debug.Log("Body Collider");
                 rollingNeroMovement.stopped = true;
 
             }

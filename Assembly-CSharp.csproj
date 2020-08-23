@@ -63,9 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Chi Chi\ChiChiCollider.cs" />
     <Compile Include="Assets\Scripts\Chi Chi\ChiChiColliderListener.cs" />
     <Compile Include="Assets\Scripts\Chi Chi\ChiChiMovement.cs" />
+    <Compile Include="Assets\Scripts\Octi\OctiColliderBridge.cs" />
+    <Compile Include="Assets\Scripts\Octi\OctiColliderListener.cs" />
+    <Compile Include="Assets\Scripts\Octi\OctiMovement.cs" />
     <Compile Include="Assets\Scripts\Other\Common.cs" />
     <Compile Include="Assets\Scripts\Player\CharacterController2D.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerColliderBridge.cs" />
