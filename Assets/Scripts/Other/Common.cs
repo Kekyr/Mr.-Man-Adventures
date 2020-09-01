@@ -26,4 +26,5 @@ public class Common : MonoBehaviour
 		yield return new WaitForSeconds(0.2f);
 		flipping = false;
 	}
+
 }

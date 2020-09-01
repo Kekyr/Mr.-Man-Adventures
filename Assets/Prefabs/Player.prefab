@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1937450932676944332}
   - component: {fileID: 1937450932676944323}
+  - component: {fileID: 1937450932676944322}
   - component: {fileID: 1937450932676944334}
   - component: {fileID: 1937450932676944333}
   - component: {fileID: 1937450932676944329}
@@ -47,7 +48,7 @@ GameObject:
   - component: {fileID: 1937450932676944328}
   - component: {fileID: 1937450932676944335}
   - component: {fileID: 7662961495376449854}
-  - component: {fileID: 1937450932676944322}
+  - component: {fileID: 4401658382985185463}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -121,6 +122,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1937450932676944322
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937450932676944321}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b92a8bf74d42c74daa28c1177c38c4c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &1937450932676944334
 Rigidbody2D:
   serializedVersion: 4
@@ -181,9 +201,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.025962591, y: -0.17441744}
+  m_Offset: {x: 0.025962591, y: -0.17309219}
   serializedVersion: 2
-  m_Radius: 0.32274467
+  m_Radius: 0.32141942
 --- !u!114 &9076983351064929049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,26 +278,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff14677a0bc60844ab0efda786550675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   healthPoints: 3
---- !u!95 &1937450932676944322
-Animator:
-  serializedVersion: 3
+--- !u!114 &4401658382985185463
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937450932676944321}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2b92a8bf74d42c74daa28c1177c38c4c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f52401a489db9a4a97af929b6dfdd47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfCoins: {fileID: 0}
+  text: 
 --- !u!1 &7212870516529350194
 GameObject:
   m_ObjectHideFlags: 0
