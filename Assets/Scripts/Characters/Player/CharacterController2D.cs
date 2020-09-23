@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,10 +11,12 @@ public class CharacterController2D : MonoBehaviour
 
 	[SerializeField] private LayerMask whatIsGround;// Слои с коллайдерами являющимися поверхностями
 	[SerializeField] private Transform groundCheck;// Центр круга проверки приземления
+	public AudioClip jumpSFX;
 	private Rigidbody2D rigidBody2D;
 	private Common common;
+	private AudioManager audioManager;
 
-	[SerializeField] private float jumpForce = 400f;                        // Сила с которой прыгает игрок
+	[SerializeField] private float jumpForce = 0.05f;                        // Сила с которой прыгает игрок
 	[Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;//Сглаживание передвижения
 	const float groundedRadius = .2f; // Радиус круга проверки приземления
 	private bool grounded;            // Проверка приземления игрока
@@ -24,6 +27,7 @@ public class CharacterController2D : MonoBehaviour
 	{
 		rigidBody2D = GetComponent<Rigidbody2D>();
 		common = FindObjectOfType<Common>();
+		audioManager = FindObjectOfType<AudioManager>();
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -65,6 +69,7 @@ public class CharacterController2D : MonoBehaviour
 
 		if (grounded && jump)
 		{
+			audioManager.PlaySFX(jumpSFX);
 			grounded = false;
 			rigidBody2D.AddForce(new Vector2(0f, jumpForce));
 		}

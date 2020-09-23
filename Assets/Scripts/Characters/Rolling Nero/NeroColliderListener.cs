@@ -3,20 +3,24 @@ using UnityEngine;
 
 public class NeroColliderListener : MonoBehaviour
 {
+    public AudioClip squishSFX;
+    private AudioManager audioManager;
     private PlayerHealth playerHealth;
     private RollingNeroMovement rollingNeroMovement;
     private Rigidbody2D rigidBody2D;
     private Animator animator;
-    public string currentTag;//Тэг сработавшего коллайдера
+    public string currentTag;//Тег сработавшего коллайдера
     
 
     //Подключение коллайдеров детей
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        playerHealth = FindObjectOfType<PlayerHealth>();
         rollingNeroMovement = GetComponent<RollingNeroMovement>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        
 
         var colliders = GetComponentsInChildren<Collider2D>();
         foreach (var col in colliders) 
@@ -36,6 +40,7 @@ public class NeroColliderListener : MonoBehaviour
         {
             if (currentTag == "Head")
             {
+                audioManager.PlaySFX(squishSFX);
                 StartCoroutine(DelayedDestruction(collision));
             }
             else if (currentTag == "Top")
@@ -52,7 +57,6 @@ public class NeroColliderListener : MonoBehaviour
             if (currentTag == "Body")
             {
                 rollingNeroMovement.stopped = true;
-
             }
         }
         
