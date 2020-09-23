@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class PlayerColliderListener : MonoBehaviour
 {
+    public AudioClip deathSFX;
+    private AudioManager audioManager;
     public Animator animator;
 
     //Подключение коллайдеров детей
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         animator = GetComponentInParent<Animator>();
         var collider = GetComponentInChildren<Collider2D>();
         if (collider.gameObject != gameObject)
@@ -23,10 +26,12 @@ public class PlayerColliderListener : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Body"))
         {
+            audioManager.PlaySFX(deathSFX, 0.2f);
             StartCoroutine(DelayedParentDestruction(collision));
         }
         else if(collision.gameObject.CompareTag("ChiChi"))
         {
+            audioManager.PlaySFX(deathSFX, 0.2f);
             StartCoroutine(DelayedDestruction(collision));
         }
         

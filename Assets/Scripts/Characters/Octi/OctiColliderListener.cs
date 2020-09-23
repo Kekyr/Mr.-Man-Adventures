@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class OctiColliderListener : MonoBehaviour
 {
+    public AudioClip deathSFX;
+    private AudioManager audioManager;
     private PlayerHealth playerHealth;
     private OctiMovement octiMovement;
     private Rigidbody2D rigidBody2D;
@@ -13,10 +15,12 @@ public class OctiColliderListener : MonoBehaviour
     //Подключение коллайдеров детей
     private void Start()
     {
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        audioManager = FindObjectOfType<AudioManager>();
         octiMovement = GetComponent<OctiMovement>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerHealth = FindObjectOfType<PlayerHealth>();
+        
 
         var colliders = GetComponentsInChildren<Collider2D>();
         foreach (var col in colliders)
@@ -36,6 +40,7 @@ public class OctiColliderListener : MonoBehaviour
         {
             if (currentTag == "Head")
             {
+                audioManager.PlaySFX(deathSFX,0.2f);
                 StartCoroutine(DelayedDestruction());
             }
             else if (currentTag == "Body")

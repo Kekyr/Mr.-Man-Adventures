@@ -8,15 +8,21 @@ public class ChiChiMovement: MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private Common common;
 
-    [Range(0, .3f)] [SerializeField] private float movementSmoothing = .2f;
-    public float speed = 200f;
+    [Range(0, .3f)] [SerializeField] private float movementSmoothing1 = .2f;
+    public float speed1 = 200f;
+    [Range(0, .3f)] [SerializeField] private float movementSmoothing2 = .05f;
+    public float speed2 = 4.5f;
     public float nextWaypointDistance = 3f;
+    public bool isPlayerHere = false;
+    public bool stopped = false;
 
     private Path path;
     private int currentWaypoint = 0;
     private Vector3 velocity = Vector3.zero;
+    private Vector3 targetVelocity;
     private Vector2 destination;
     private bool facingRight = false;
+    
 
     private void Start()
     {
@@ -50,24 +56,42 @@ public class ChiChiMovement: MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (path == null)
-            return;
-
-        if(currentWaypoint>=path.vectorPath.Count)
+        if (isPlayerHere)
         {
-            return;
+            if (path == null)
+                return;
+
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                return;
+            }
+
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rigidBody2D.position).normalized;
+            targetVelocity = direction * speed1 * Time.fixedDeltaTime;
+
+            rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing1);
+
+            float distance = Vector2.Distance(rigidBody2D.position, path.vectorPath[currentWaypoint]);
+
+            if (distance < nextWaypointDistance)
+            {
+                currentWaypoint++;
+            }
+
+            
         }
-        
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rigidBody2D.position).normalized;
-        Vector3 targetVelocity = direction * speed * Time.fixedDeltaTime;
-
-        rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing);
-
-        float distance = Vector2.Distance(rigidBody2D.position, path.vectorPath[currentWaypoint]);
-
-        if(distance<nextWaypointDistance)
+        else
         {
-            currentWaypoint++;
+            if (stopped)
+            {
+                speed2 *= -1;
+                stopped = false;
+            }
+
+            targetVelocity = new Vector2(speed2, rigidBody2D.velocity.y);
+
+            rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing2);
+
         }
 
         if (targetVelocity.x >= 0.01f && !facingRight)
@@ -78,5 +102,7 @@ public class ChiChiMovement: MonoBehaviour
         {
             common.Flip(ref facingRight, gameObject);
         }
+
+
     }
 }

@@ -4,17 +4,21 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public Heart[] hearts;
+    public AudioClip deathSFX;
+    public AudioClip hurtSFX;
     private Animator animator;
-    private Rigidbody2D rigidBody2D; 
+    private Rigidbody2D rigidBody2D;
+    private AudioManager audioManager;
 
     public int healthPoints = 3; //Очки здоровья игрока
     private bool damaging = false;
-    private Vector2 lastJump=new Vector2(0,700);//Сила с которой игрок полетит вверх после смерти
+    private Vector2 lastJump=new Vector2(0,0.07f);//Сила с которой игрок полетит вверх после смерти
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     
     //Нанесение урона игроку
@@ -27,10 +31,14 @@ public class PlayerHealth : MonoBehaviour
             healthPoints -= 1;
             if (healthPoints <= 0)
             {
+                audioManager.PlaySFX(hurtSFX, 1f);
+                audioManager.StopMusic();
+                audioManager.PlaySFX(deathSFX);
                 StartCoroutine(DelayedDestruction());
             }
             else
             {
+                audioManager.PlaySFX(hurtSFX,1);
                 StartCoroutine(TemporaryImmortality());
             }
         }

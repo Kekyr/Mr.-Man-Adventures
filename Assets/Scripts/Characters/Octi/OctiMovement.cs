@@ -6,7 +6,7 @@ public class OctiMovement : MonoBehaviour
     private Animator animator;
     private Common common;
 
-    [SerializeField] public float moveSpeed = 6.5f;//Скорость передвижения
+    [SerializeField] public float moveSpeed = 5.5f;//Скорость передвижения
     [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;//Сглаживание передвижения
     public bool stopped = false;
     private bool facingRight = false;//Направление спрайта
@@ -28,7 +28,6 @@ public class OctiMovement : MonoBehaviour
         {
             if (stopped)
             {
-                rigidBody2D.velocity = Vector3.zero;
                 moveSpeed *= -1;
                 animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
                 stopped = false;
@@ -37,9 +36,6 @@ public class OctiMovement : MonoBehaviour
             targetVelocity = new Vector2(moveSpeed, rigidBody2D.velocity.y);
 
             rigidBody2D.velocity = Vector3.SmoothDamp(rigidBody2D.velocity, targetVelocity, ref velocity, movementSmoothing);
-
-            //rigidBody2D.AddForce(targetVelocity);//14.5 скорость
-
 
             if (moveSpeed > 0 && !facingRight)
             {

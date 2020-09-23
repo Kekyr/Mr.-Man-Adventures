@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Characters\Chi Chi\ChiChiColliderBridge.cs" />
     <Compile Include="Assets\Scripts\Characters\Chi Chi\ChiChiColliderListener.cs" />
     <Compile Include="Assets\Scripts\Characters\Chi Chi\ChiChiMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Octi\OctiColliderBridge.cs" />
@@ -79,7 +80,9 @@
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\RollingNeroMovement.cs" />
     <Compile Include="Assets\Scripts\Objects\CoinColliderListener.cs" />
     <Compile Include="Assets\Scripts\Objects\Heart.cs" />
+    <Compile Include="Assets\Scripts\Other\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Other\Common.cs" />
+    <Compile Include="Assets\Scripts\Other\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
