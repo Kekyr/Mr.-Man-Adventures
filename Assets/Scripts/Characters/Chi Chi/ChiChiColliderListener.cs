@@ -4,6 +4,7 @@ public class ChiChiColliderListener : MonoBehaviour
 {
     private PlayerHealth playerHealth;
     private ChiChiMovement chichiMovement;
+
     public string currentTag;//Тэг сработавшего коллайдера
 
     private void Start()
@@ -46,8 +47,6 @@ public class ChiChiColliderListener : MonoBehaviour
         {
             if (currentTag == "Trap")
             {
-                Debug.Log("We here!");
-                Debug.Log(chichiMovement.isPlayerHere);
                 chichiMovement.isPlayerHere = true;
             }
         }

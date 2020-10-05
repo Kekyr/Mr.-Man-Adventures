@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6032159374326922680}
   - component: {fileID: 7274450474156489608}
   - component: {fileID: 2421420026641484620}
-  - component: {fileID: 6641163318798058522}
   m_Layer: 9
   m_Name: Chi Chi
   m_TagString: ChiChi
@@ -184,24 +183,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  movementSmoothing: 0.2
-  speed: 400
+  movementSmoothing1: 0.2
+  speed1: 200
+  movementSmoothing2: 0.05
+  speed2: 3.5
   nextWaypointDistance: 3
   isPlayerHere: 0
   stopped: 0
---- !u!114 &6641163318798058522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818493407794991015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79cde9e2fcf2b264b8d1c2cb827a164e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTag: 
 --- !u!1 &2182118458731851033
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,9 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6963575361344483277}
   - component: {fileID: 3757636513204255642}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Trap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,7 +231,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -271,11 +259,11 @@ GameObject:
   - component: {fileID: 2121412082}
   m_Layer: 9
   m_Name: 'Chi Chi '
-  m_TagString: ChiChi
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3579284376740633639
 Transform:
   m_ObjectHideFlags: 0

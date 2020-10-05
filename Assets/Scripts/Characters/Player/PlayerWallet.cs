@@ -7,6 +7,7 @@ public class PlayerWallet : MonoBehaviour
 
     [SerializeField] private float amountOfCoins=0;
 
+    // Подсчёт собранных монет
     public void AddCoin()
     {
         amountOfCoins++;

@@ -9,6 +9,7 @@ public class OctiColliderListener : MonoBehaviour
     private OctiMovement octiMovement;
     private Rigidbody2D rigidBody2D;
     private Animator animator;
+
     public string currentTag;//Тэг сработавшего коллайдера
 
 
@@ -33,7 +34,7 @@ public class OctiColliderListener : MonoBehaviour
         }
     }
 
-    //Взаимодействие с Rolling Nero
+    //Взаимодействие с Octi
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
