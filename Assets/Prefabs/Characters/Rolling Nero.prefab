@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda8a2d1b406e934d84b18003c506d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathSFX: {fileID: 0}
+  squishSFX: {fileID: 0}
   currentTag: 
 --- !u!1 &6927594032839585965
 GameObject:
@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6927594032992846556
 Transform:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda8a2d1b406e934d84b18003c506d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathSFX: {fileID: 0}
+  squishSFX: {fileID: 8300000, guid: 9216ffa299ce34f41bc6fc4b58a759aa, type: 3}
   currentTag: 
 --- !u!1 &6927594033820464373
 GameObject:

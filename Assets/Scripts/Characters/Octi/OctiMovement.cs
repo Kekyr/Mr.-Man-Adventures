@@ -9,9 +9,9 @@ public class OctiMovement : MonoBehaviour
     [SerializeField] public float moveSpeed = 5.5f;//Скорость передвижения
     [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;//Сглаживание передвижения
     public bool stopped = false;
-    private bool facingRight = false;//Направление спрайта
     public Vector3 targetVelocity;
     private Vector3 velocity = Vector3.zero;
+    private bool facingRight = false;//Направление спрайта
 
 
     private void Start()
@@ -21,7 +21,7 @@ public class OctiMovement : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
-
+    // Передвижение Octi
     private void FixedUpdate()
     {
         if (enabled)

@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.PlayMusic(track1);
         audioManager.PlayMusicWithFade(track2,59);
-        
     }
 
     

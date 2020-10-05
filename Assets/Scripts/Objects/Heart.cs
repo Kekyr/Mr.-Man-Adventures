@@ -4,9 +4,7 @@ using UnityEngine.UI;
 public class Heart : MonoBehaviour
 {
     public Texture2D alive;
-
     public Texture2D dead;
-
     private RawImage rawImage;
 
     private bool isAlive = false;
@@ -16,6 +14,7 @@ public class Heart : MonoBehaviour
         rawImage = GetComponent<RawImage>();
     }
 
+    //Смена спрайта при потере одной жизни
     public void ChangeSprite()
     {
         if (!isAlive)

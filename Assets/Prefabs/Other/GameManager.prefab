@@ -56,4 +56,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11cae80151b0e64190b11f25c2f7ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 8300000, guid: 7fb6d155cb2119f4cafe64ce6f8de2d1, type: 3}
+  track1: {fileID: 8300000, guid: 7b958a6451d4e7b45a80608adb951a29, type: 3}
+  track2: {fileID: 8300000, guid: 7fb6d155cb2119f4cafe64ce6f8de2d1, type: 3}

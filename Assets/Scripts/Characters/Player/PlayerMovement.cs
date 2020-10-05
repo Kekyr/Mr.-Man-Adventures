@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
-            animator.SetBool("IsJumping", true);
+            animator.SetTrigger("IsJumping");
         }
 
         if (Input.GetButtonDown("Punch"))
@@ -47,12 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //Отключение анимации прыжка после приземления
-    public void OnLanding()
-    {
-        animator.SetBool("IsJumping", false);
-    }
-
     //Передвижение игрока
     private void FixedUpdate()
     {
@@ -62,4 +56,5 @@ public class PlayerMovement : MonoBehaviour
             jump = false;
         }
     }
+
 }

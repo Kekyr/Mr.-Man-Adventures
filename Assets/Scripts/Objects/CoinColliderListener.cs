@@ -21,6 +21,7 @@ public class CoinColliderListener : MonoBehaviour
         }
     }
 
+    //Сбор монет
     private IEnumerator PickUpCoin()
     {
         audioManager.PlaySFX(coinSFX);
