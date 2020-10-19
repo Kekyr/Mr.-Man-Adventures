@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public List<Heart> hearts = new List<Heart>();
 
     public int healthPoints = 3; //Очки здоровья игрока
+    public bool falling = false;
     private bool damaging = false;
     private Vector2 lastJump = new Vector2(0, 0.07f);//Сила с которой игрок полетит вверх после смерти
     private Heart temp;
@@ -33,19 +34,23 @@ public class PlayerHealth : MonoBehaviour
     //Нанесение урона игроку
     public void Damage()
     {
-        hearts[healthPoints - 1].ChangeSprite();
-        healthPoints -= 1;
-        audioManager.PlaySFX(hurtSFX);
-        if (healthPoints <= 0)
-        {
-            audioManager.StopMusic();
-            audioManager.PlaySFX(deathSFX);
-            StartCoroutine(DelayedDestruction());
-        }
-        else if (!damaging)
+        if (!damaging || falling)
         {
             damaging = true;
-            StartCoroutine(TemporaryImmortality());
+            //hearts[healthPoints - 1].ChangeSprite();
+            healthPoints -= 1;
+            audioManager.PlaySFX(hurtSFX);
+            if (healthPoints <= 0)
+            {
+                audioManager.StopMusic();
+                audioManager.PlaySFX(deathSFX);
+                StartCoroutine(DelayedDestruction());
+            }
+            else
+            {
+                StartCoroutine(TemporaryImmortality());
+            }
+            
         }
     }
 
