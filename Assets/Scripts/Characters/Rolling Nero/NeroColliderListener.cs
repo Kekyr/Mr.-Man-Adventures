@@ -45,10 +45,18 @@ public class NeroColliderListener : MonoBehaviour
             }
             else if (currentTag == "Top")
             {
+                if (playerHealth == null)
+                {
+                    playerHealth = FindObjectOfType<PlayerHealth>();
+                }
                 playerHealth.Damage();
             }
             else if(currentTag=="Body")
             {
+                if (playerHealth == null)
+                {
+                    playerHealth = FindObjectOfType<PlayerHealth>();
+                }
                 playerHealth.Damage();
             }
         }
@@ -69,6 +77,7 @@ public class NeroColliderListener : MonoBehaviour
         gameObject.GetComponent<RollingNeroMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
         Destroy(gameObject);
     }
 

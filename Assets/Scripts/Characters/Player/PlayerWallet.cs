@@ -8,6 +8,11 @@ public class PlayerWallet : MonoBehaviour
     [SerializeField] private float amountOfCoins=0;
 
     // Подсчёт собранных монет
+
+    private void Awake()
+    {
+        numberOfCoins = FindObjectOfType<TextMeshProUGUI>();
+    }
     public void AddCoin()
     {
         amountOfCoins++;

@@ -45,6 +45,7 @@ public class PlayerColliderListener : MonoBehaviour
         collision.gameObject.GetComponent<ChiChiMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
         Destroy(collision.gameObject);
         
     }
@@ -56,6 +57,7 @@ public class PlayerColliderListener : MonoBehaviour
         collision.gameObject.GetComponentInParent<RollingNeroMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
         Destroy(collision.gameObject.transform.parent.gameObject); 
     }
 
