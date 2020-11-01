@@ -26,6 +26,7 @@ public class ChiChiMovement: MonoBehaviour
 
     private void Start()
     {
+        target = FindObjectOfType<PlayerMovement>().transform;
         common = FindObjectOfType<Common>();
         seeker = GetComponent<Seeker>();
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -39,6 +40,10 @@ public class ChiChiMovement: MonoBehaviour
     {
         if (seeker.IsDone())
         {
+            if(target==null)
+            {
+                target = FindObjectOfType<PlayerMovement>().transform;
+            }
             destination = target.position+new Vector3(1f,0);
             seeker.StartPath(rigidBody2D.position, destination, OnPathComplete);
         }

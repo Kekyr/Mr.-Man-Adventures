@@ -37,7 +37,7 @@ public class RollingNeroMovement : MonoBehaviour
                 rigidBody2D.velocity = Vector3.zero;
                 rollSpeed *= -1;
                 animator.SetFloat("Speed", Mathf.Abs(rigidBody2D.velocity.x));
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(2);
                 stopped = false;
             }
 

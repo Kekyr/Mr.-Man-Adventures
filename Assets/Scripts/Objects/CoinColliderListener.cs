@@ -4,13 +4,14 @@ using UnityEngine;
 public class CoinColliderListener : MonoBehaviour
 {
     public AudioClip coinSFX;
-    public PlayerWallet playerWallet;
-
+    
+    private PlayerWallet playerWallet;
     private AudioManager audioManager;
 
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
+        playerWallet = FindObjectOfType<PlayerWallet>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

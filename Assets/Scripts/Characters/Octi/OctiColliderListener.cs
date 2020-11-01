@@ -46,6 +46,10 @@ public class OctiColliderListener : MonoBehaviour
             }
             else if (currentTag == "Body")
             {
+                if(playerHealth==null)
+                {
+                    playerHealth = FindObjectOfType<PlayerHealth>();
+                }
                 playerHealth.Damage();
             }
         }
@@ -66,6 +70,7 @@ public class OctiColliderListener : MonoBehaviour
         gameObject.GetComponent<OctiMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
         Destroy(gameObject);
     }
 }

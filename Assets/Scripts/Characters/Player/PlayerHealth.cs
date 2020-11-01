@@ -28,6 +28,9 @@ public class PlayerHealth : MonoBehaviour
         temp = hearts[0];
         hearts[0] = hearts[1];
         hearts[1] = temp;
+        temp = hearts[2];
+        hearts[2] = hearts[0];
+        hearts[0] = temp;
         hearts.Reverse();
     }
 
