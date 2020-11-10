@@ -12,26 +12,25 @@ public class MovingCamera : MonoBehaviour
     private Vector3 BackgroundNewPosition;
     private float pastXPosition = 6;
 
+    private void Start()
+    {
+        target = FindObjectOfType<PlayerMovement>().transform;
+    }
     private void FixedUpdate()
     {
         if (target != null)
         {
             CameraNewPosition = target.TransformPoint(new Vector3(0, 0, -1));
             BackgroundNewPosition = target.TransformPoint(new Vector3(0, 0, 1));
-        }
-        else
-        {
-            target = (FindObjectOfType<PlayerMovement>()).transform;
-            CameraNewPosition = target.TransformPoint(new Vector3(0, 0, -1));
-            BackgroundNewPosition = target.TransformPoint(new Vector3(0, 0, 1));
-        }
-        BackgroundNewPosition.y = 3.54f;
-        CameraNewPosition.y = 3.54f;
-        if (!(CameraNewPosition.x < pastXPosition) && !(BackgroundNewPosition.x<pastXPosition))
-        {
-            transform.position = Vector3.SmoothDamp(transform.position, CameraNewPosition, ref cameraVelocity, smoothTime);
-            background.position = Vector3.SmoothDamp(background.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);
-            pastXPosition = target.position.x;
+
+            BackgroundNewPosition.y = 3.54f;
+            CameraNewPosition.y = 3.54f;
+            if (!(CameraNewPosition.x < pastXPosition) && !(BackgroundNewPosition.x < pastXPosition))
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, CameraNewPosition, ref cameraVelocity, smoothTime);
+                background.position = Vector3.SmoothDamp(background.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);
+                pastXPosition = target.position.x;
+            }
         }
     }
 }

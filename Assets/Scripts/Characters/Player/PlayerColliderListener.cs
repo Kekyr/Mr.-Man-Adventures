@@ -22,43 +22,43 @@ public class PlayerColliderListener : MonoBehaviour
     }
 
     //Удар кулаком
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.gameObject.CompareTag("Body"))
+        if(collider.gameObject.CompareTag("Body"))
         {
             audioManager.PlaySFX(deathSFX, 0.2f);
-            StartCoroutine(DelayedParentDestruction(collision));
+            StartCoroutine(DelayedParentDestruction(collider));
         }
-        else if(collision.gameObject.CompareTag("ChiChi"))
+        else if(collider.gameObject.CompareTag("ChiChi"))
         {
             audioManager.PlaySFX(deathSFX, 0.2f);
-            StartCoroutine(DelayedDestruction(collision));
+            StartCoroutine(DelayedDestruction(collider));
         }
         
     }
 
     //Уничтожение врага (ChiChi) после удара кулаком
-    private IEnumerator DelayedDestruction(Collider2D collision)
+    private IEnumerator DelayedDestruction(Collider2D collider)
     {
-        collision.gameObject.GetComponent<Animator>().SetBool("IsDead", true);
-        collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
-        collision.gameObject.GetComponent<ChiChiMovement>().enabled = false;
+        collider.gameObject.GetComponent<Animator>().SetBool("IsDead", true);
+        collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
+        collider.gameObject.GetComponent<ChiChiMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
         Physics2D.IgnoreLayerCollision(8, 9, false);
-        Destroy(collision.gameObject);
+        Destroy(collider.gameObject);
         
     }
     
     //Уничтожение врага (Rolling Nero) после удара кулаком
-    private IEnumerator DelayedParentDestruction(Collider2D collision)
+    private IEnumerator DelayedParentDestruction(Collider2D collider)
     {
-        collision.gameObject.GetComponentInParent<Animator>().SetBool("IsDead", true);
-        collision.gameObject.GetComponentInParent<RollingNeroMovement>().enabled = false;
+        collider.gameObject.GetComponentInParent<Animator>().SetBool("IsDead", true);
+        collider.gameObject.GetComponentInParent<RollingNeroMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         yield return new WaitForSeconds(5);
         Physics2D.IgnoreLayerCollision(8, 9, false);
-        Destroy(collision.gameObject.transform.parent.gameObject); 
+        Destroy(collider.gameObject.transform.parent.gameObject); 
     }
 
 

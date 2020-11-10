@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Floor : MonoBehaviour
     private GameObject nearBlock;
     private GameObject block;
     private PlayerHealth playerHealth;
+    private SpriteRenderer playerSprite;
 
     private int healthPoints;
     private Vector3 newPosition;
@@ -23,6 +25,7 @@ public class Floor : MonoBehaviour
     {
         player = collider.gameObject;
         playerHealth = player.GetComponent<PlayerHealth>();
+        playerSprite = player.GetComponent<SpriteRenderer>();
         healthPoints = playerHealth.healthPoints;
         if (healthPoints == 1)
         {
@@ -35,12 +38,18 @@ public class Floor : MonoBehaviour
             newPosition = player.transform.position;
             tiles = Physics2D.OverlapCircleAll(newPosition, 2f, 11);
             FindTile();
-            Destroy(collider.gameObject);
-            player = Instantiate<GameObject>(prefab, newPosition, Quaternion.identity);
-            playerHealth = player.GetComponent<PlayerHealth>();
-            playerHealth.healthPoints = healthPoints;
-            playerHealth.Damage();
+            StartCoroutine(Delay());
         }
+    }
+
+    public IEnumerator Delay()
+    {
+        playerSprite.enabled = false;
+        player.transform.position = newPosition;
+        yield return new WaitForSeconds(0.3f);
+        playerSprite.enabled = true;
+        playerHealth.falling = true;
+        playerHealth.Damage();
     }
 
     private void FindTile()
@@ -75,4 +84,6 @@ public class Floor : MonoBehaviour
         }
         newPosition.y = 3;
     }
+
+    
 }

@@ -29,10 +29,6 @@ public class ChiChiColliderListener : MonoBehaviour
         {
             if (currentTag == "ChiChi")
             {
-                if (playerHealth == null)
-                {
-                    playerHealth = FindObjectOfType<PlayerHealth>();
-                }
                 playerHealth.Damage();
             }
         }

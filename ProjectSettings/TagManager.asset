@@ -12,6 +12,9 @@ TagManager:
   - ChiChi
   - Border
   - Trap
+  - Burger
+  - Fries
+  - Purchase
   layers:
   - Default
   - TransparentFX

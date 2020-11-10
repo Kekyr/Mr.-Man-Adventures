@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator;
     public Collider2D fistCollider;//Коллайдер кулака, включается после удара и выключается по его окончании
+    public Collider2D purchaseCollider;
 
     [SerializeField] private float runSpeed = 15f; //Скорость перемещения игрока
     public float horizontalMove = 0f;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         fistCollider.enabled = false;
+        purchaseCollider.enabled = false;
         audioManager = FindObjectOfType<AudioManager>();
     }
 
@@ -44,6 +46,17 @@ public class PlayerMovement : MonoBehaviour
             fistCollider.enabled = false;
             animator.SetBool("IsPunching", false);
         }
+
+        if (Input.GetButtonDown("Purchase"))
+        {
+            purchaseCollider.enabled = true;
+        }
+
+        if (Input.GetButtonUp("Purchase"))
+        {
+            purchaseCollider.enabled = false;
+        }
+
 
     }
 
