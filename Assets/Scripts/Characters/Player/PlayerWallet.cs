@@ -5,7 +5,7 @@ public class PlayerWallet : MonoBehaviour
 {
     public TextMeshProUGUI numberOfCoins;
 
-    [SerializeField] private float amountOfCoins=0;
+    public float amountOfCoins=0;
 
     // Подсчёт собранных монет
 
@@ -17,5 +17,20 @@ public class PlayerWallet : MonoBehaviour
     {
         amountOfCoins++;
         numberOfCoins.text = ((amountOfCoins / 100).ToString()).Replace(",", string.Empty);
+        if(amountOfCoins%10==0)
+        {
+            numberOfCoins.text += "0";
+        }
+    }
+
+    public void DeleteCoins(int amount)
+    {
+        amountOfCoins -= amount;
+        numberOfCoins.text = ((amountOfCoins / 100).ToString()).Replace(",", string.Empty);
+        if (amountOfCoins % 10 == 0)
+        {
+            numberOfCoins.text += "0";
+        }
+
     }
 }

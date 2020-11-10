@@ -24,14 +24,6 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         audioManager = FindObjectOfType<AudioManager>();
-        hearts = (FindObjectsOfType<Heart>()).ToList();
-        temp = hearts[0];
-        hearts[0] = hearts[1];
-        hearts[1] = temp;
-        temp = hearts[2];
-        hearts[2] = hearts[0];
-        hearts[0] = temp;
-        hearts.Reverse();
     }
 
     //Нанесение урона игроку
@@ -40,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
         if (!damaging || falling)
         {
             damaging = true;
-            //hearts[healthPoints - 1].ChangeSprite();
+            hearts[healthPoints - 1].ChangeSprite();
             healthPoints -= 1;
             audioManager.PlaySFX(hurtSFX);
             if (healthPoints <= 0)
@@ -67,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9, false);
         animator.SetBool("IsHurt", false);
         damaging = false;
+        falling = false;
     }
 
     //Уничтожение игрока при очках здоровья равных нулю

@@ -16,7 +16,8 @@ public class Common : MonoBehaviour
 			Vector3 theScale = gameObject.transform.localScale;
 			theScale.x *= -1;
 			gameObject.transform.localScale = theScale;
-			StartCoroutine(Delay());
+			//StartCoroutine(Delay());
+			flipping = false;
 		}
 	}
 

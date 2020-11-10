@@ -45,18 +45,10 @@ public class NeroColliderListener : MonoBehaviour
             }
             else if (currentTag == "Top")
             {
-                if (playerHealth == null)
-                {
-                    playerHealth = FindObjectOfType<PlayerHealth>();
-                }
                 playerHealth.Damage();
             }
             else if(currentTag=="Body")
             {
-                if (playerHealth == null)
-                {
-                    playerHealth = FindObjectOfType<PlayerHealth>();
-                }
                 playerHealth.Damage();
             }
         }

@@ -46,10 +46,6 @@ public class OctiColliderListener : MonoBehaviour
             }
             else if (currentTag == "Body")
             {
-                if(playerHealth==null)
-                {
-                    playerHealth = FindObjectOfType<PlayerHealth>();
-                }
                 playerHealth.Damage();
             }
         }

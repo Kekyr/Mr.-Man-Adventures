@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using Pathfinding;
+using System.Collections;
+
 public class ChiChiMovement: MonoBehaviour
 {
     public Transform target;
 
     private Seeker seeker;
     private Rigidbody2D rigidBody2D;
-    private Common common;
 
     [Range(0, .3f)] [SerializeField] private float movementSmoothing1 = .2f;
     public float speed1 = 200f;
@@ -22,12 +23,12 @@ public class ChiChiMovement: MonoBehaviour
     private Vector3 targetVelocity;
     private Vector2 destination;
     private bool facingRight = false;
+    private bool flipping = false;
     
 
     private void Start()
     {
         target = FindObjectOfType<PlayerMovement>().transform;
-        common = FindObjectOfType<Common>();
         seeker = GetComponent<Seeker>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(9, 12, true);
@@ -40,12 +41,11 @@ public class ChiChiMovement: MonoBehaviour
     {
         if (seeker.IsDone())
         {
-            if(target==null)
+            if (target != null)
             {
-                target = FindObjectOfType<PlayerMovement>().transform;
+                destination = target.position + new Vector3(1f, 0);
+                seeker.StartPath(rigidBody2D.position, destination, OnPathComplete);
             }
-            destination = target.position+new Vector3(1f,0);
-            seeker.StartPath(rigidBody2D.position, destination, OnPathComplete);
         }
     }
 
@@ -101,13 +101,35 @@ public class ChiChiMovement: MonoBehaviour
 
         if (targetVelocity.x >= 0.01f && !facingRight)
         {
-            common.Flip(ref facingRight, gameObject);
+            Flip(ref facingRight);
         }
         else if (targetVelocity.x <= -0.01f && facingRight)
         {
-            common.Flip(ref facingRight, gameObject);
+            Flip(ref facingRight);
         }
 
 
+    }
+
+    //Изменение направления спрайта
+    public void Flip(ref bool facingRight)
+    {
+        if (!flipping)
+        {
+            flipping = true;
+            facingRight = !facingRight;
+
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+            StartCoroutine(Delay());
+        }
+    }
+
+    //Задержка
+    public IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        flipping = false;
     }
 }
