@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Head
-  - Body
   - Fist
   - Top
   - GameManager
@@ -15,6 +14,8 @@ TagManager:
   - Burger
   - Fries
   - Purchase
+  - RollingNeroBody
+  - OctiBody
   layers:
   - Default
   - TransparentFX

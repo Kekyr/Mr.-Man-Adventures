@@ -24,7 +24,7 @@ public class PlayerColliderListener : MonoBehaviour
     //Удар кулаком
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("Body"))
+        if (collider.gameObject.CompareTag("RollingNeroBody"))
         {
             audioManager.PlaySFX(deathSFX, 0.2f);
             StartCoroutine(DelayedParentDestruction(collider));

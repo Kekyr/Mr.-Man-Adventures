@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Common : MonoBehaviour
 {
@@ -16,16 +15,10 @@ public class Common : MonoBehaviour
 			Vector3 theScale = gameObject.transform.localScale;
 			theScale.x *= -1;
 			gameObject.transform.localScale = theScale;
-			//StartCoroutine(Delay());
 			flipping = false;
 		}
 	}
 
-	//Задержка
-	public IEnumerator Delay()
-	{
-		yield return new WaitForSeconds(0.2f);
-		flipping = false;
-	}
+	
 
 }

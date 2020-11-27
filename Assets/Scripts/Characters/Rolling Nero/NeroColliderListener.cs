@@ -47,14 +47,14 @@ public class NeroColliderListener : MonoBehaviour
             {
                 playerHealth.Damage();
             }
-            else if(currentTag=="Body")
+            else if(currentTag== "RollingNeroBody")
             {
                 playerHealth.Damage();
             }
         }
         else if (collision.gameObject.CompareTag("Border"))
         {
-            if (currentTag == "Body")
+            if (currentTag == "RollingNeroBody")
             {
                 rollingNeroMovement.stopped = true;
             }

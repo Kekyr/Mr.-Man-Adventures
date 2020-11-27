@@ -11,6 +11,7 @@ public class MovingCamera : MonoBehaviour
     private Vector3 CameraNewPosition;
     private Vector3 BackgroundNewPosition;
     private float pastXPosition = 6;
+    
 
     private void Start()
     {
@@ -25,7 +26,8 @@ public class MovingCamera : MonoBehaviour
 
             BackgroundNewPosition.y = 3.54f;
             CameraNewPosition.y = 3.54f;
-            if (!(CameraNewPosition.x < pastXPosition) && !(BackgroundNewPosition.x < pastXPosition))
+
+            if (((CameraNewPosition.x > pastXPosition) && (BackgroundNewPosition.x > pastXPosition)))
             {
                 transform.position = Vector3.SmoothDamp(transform.position, CameraNewPosition, ref cameraVelocity, smoothTime);
                 background.position = Vector3.SmoothDamp(background.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);

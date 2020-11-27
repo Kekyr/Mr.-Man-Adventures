@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -17,7 +16,6 @@ public class PlayerHealth : MonoBehaviour
     public bool falling = false;
     private bool damaging = false;
     private Vector2 lastJump = new Vector2(0, 0.07f);//Сила с которой игрок полетит вверх после смерти
-    private Heart temp;
 
     private void Awake()
     {
@@ -32,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         if (!damaging || falling)
         {
             damaging = true;
-            hearts[healthPoints - 1].ChangeSprite();
+            //hearts[healthPoints - 1].ChangeSprite();
             healthPoints -= 1;
             audioManager.PlaySFX(hurtSFX);
             if (healthPoints <= 0)
@@ -54,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(8, 9, true);
         animator.SetBool("IsHurt", true);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
 
         Physics2D.IgnoreLayerCollision(8, 9, false);
         animator.SetBool("IsHurt", false);
