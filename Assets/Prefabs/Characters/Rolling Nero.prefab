@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601462418282528960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0.121, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6927594034233308768}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 8712115940249466108}
   m_Layer: 9
   m_Name: Body
-  m_TagString: Body
+  m_TagString: RollingNeroBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,6 +371,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3665159986967010358, guid: 1345db2dbd3e2e444b03d2a994a65b62,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.912
+      objectReference: {fileID: 0}
     - target: {fileID: 3698819775098064747, guid: 1345db2dbd3e2e444b03d2a994a65b62,
         type: 3}
       propertyPath: m_Name
@@ -379,7 +384,7 @@ PrefabInstance:
     - target: {fileID: 4775507263778534530, guid: 1345db2dbd3e2e444b03d2a994a65b62,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.004
+      value: -0.955
       objectReference: {fileID: 0}
     - target: {fileID: 4775507263778534530, guid: 1345db2dbd3e2e444b03d2a994a65b62,
         type: 3}

@@ -142,6 +142,7 @@
     <None Include="Assets\Sprites\Characters\Sprite Pack 3\LICENSE.txt" />
     <None Include="Assets\Plans\Диздок.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Plans\Баги и улучшения.txt" />
     <None Include="Assets\Plans\Фичи.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />

@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 6277475161545143234}
   m_Layer: 9
   m_Name: Body
-  m_TagString: Body
+  m_TagString: OctiBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,16 +1,42 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioClip track1;
-    public AudioClip track2;
+    public AudioClip[] audioClips;
     private AudioManager audioManager;
-    
+    private int clipNumber;
+
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        audioManager.PlayMusic(track1);
-        audioManager.PlayMusicWithFade(track2,59);
+        StartMusic();
+    }
+
+    private void StartMusic()
+    {
+        clipNumber = Random.Range(0, audioClips.Length);
+
+        if (clipNumber == 0)
+        {
+            audioManager.PlayMusic(audioClips[clipNumber]);
+            audioManager.PlayMusicWithFade(audioClips[clipNumber + 1],59);
+        }
+        else
+        {
+            audioManager.PlayMusic(audioClips[clipNumber]);
+            audioManager.PlayMusicWithFade(audioClips[clipNumber - 1],59);
+        }
+    }
+
+    public void RestartGame()
+    {
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+        Physics2D.IgnoreLayerCollision(8, 11, false);
+        Physics2D.IgnoreLayerCollision(8, 12, false);
+        Physics2D.IgnoreLayerCollision(8, 0, false);
+        SceneManager.LoadScene(0);
+        
     }
 
     

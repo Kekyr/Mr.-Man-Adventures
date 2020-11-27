@@ -44,14 +44,14 @@ public class OctiColliderListener : MonoBehaviour
                 audioManager.PlaySFX(deathSFX,0.2f);
                 StartCoroutine(DelayedDestruction());
             }
-            else if (currentTag == "Body")
+            else if (currentTag == "OctiBody")
             {
                 playerHealth.Damage();
             }
         }
         else if (collision.gameObject.CompareTag("Border"))
         {
-            if (currentTag == "Body")
+            if (currentTag == "OctiBody")
             {
                 octiMovement.stopped = true;
             }

@@ -1,42 +1,54 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    public GameObject prefab;
+    [SerializeField] private GameObject nearBlock;
+    [SerializeField] private LayerMask blocks;
     private GameObject player;
-    private GameObject nearBlock;
     private GameObject block;
+    private PlayerMovement playerMovement;
     private PlayerHealth playerHealth;
     private SpriteRenderer playerSprite;
 
-    private int healthPoints;
-    private Vector3 newPosition;
-    private Collider2D[] tiles;
+    [SerializeField] private Vector3 newPosition;
+    [SerializeField] private Collider2D[] tiles;
     private float minDistance = 5;
-    private float currentDistance;
-    private bool IsPositive;
+    [SerializeField] private float currentDistance;
+    private int healthPoints;
+    [SerializeField] private float direction;
+    private float offset;
     
-    
-
-
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         player = collider.gameObject;
         playerHealth = player.GetComponent<PlayerHealth>();
         playerSprite = player.GetComponent<SpriteRenderer>();
+        playerMovement = player.GetComponent<PlayerMovement>();
         healthPoints = playerHealth.healthPoints;
+        playerHealth.falling = true;
+        direction = playerMovement.lastHorizontalMove;
+        
         if (healthPoints == 1)
         {
             player.GetComponent<Rigidbody2D>().gravityScale = 0;
-            playerHealth.falling = true;
             playerHealth.Damage();
         }
         else
         {
             newPosition = player.transform.position;
-            tiles = Physics2D.OverlapCircleAll(newPosition, 2f, 11);
+            if (direction > 0)
+            {
+                offset = -1f;
+            }
+            else
+            {
+                offset = 1f;
+            }
+            newPosition.x += offset;
+            newPosition.y = 3;
+            tiles = Physics2D.OverlapCircleAll(newPosition, 1.5f, blocks);
             FindTile();
             StartCoroutine(Delay());
         }
@@ -46,27 +58,24 @@ public class Floor : MonoBehaviour
     {
         playerSprite.enabled = false;
         player.transform.position = newPosition;
-        yield return new WaitForSeconds(0.3f);
+        playerMovement.enabled = false;
+        yield return new WaitForSeconds(0.6f);
         playerSprite.enabled = true;
-        playerHealth.falling = true;
         playerHealth.Damage();
+        playerMovement.enabled = true;
     }
 
     private void FindTile()
     {
+        nearBlock = null;
+        minDistance = 5;
+        currentDistance = 0;
+
         foreach (var tile in tiles)
         {
             block = tile.gameObject;
-            if (block.transform.position.x > newPosition.x)
-            {
-                IsPositive = true;
-            }
-            else
-            {
-                IsPositive = false;
-            }
 
-            currentDistance = newPosition.x - block.transform.position.x;
+            currentDistance = Math.Abs(newPosition.x - block.transform.position.x);
             if (currentDistance < minDistance)
             {
                 minDistance = currentDistance;
@@ -74,16 +83,8 @@ public class Floor : MonoBehaviour
             }
         }
 
-        if (IsPositive)
-        {
-            newPosition.x = nearBlock.transform.position.x;
-        }
-        else
-        {
-            newPosition.x = nearBlock.transform.position.x - 2;
-        }
-        newPosition.y = 3;
+        newPosition.x = nearBlock.transform.position.x;
     }
 
-    
+
 }
