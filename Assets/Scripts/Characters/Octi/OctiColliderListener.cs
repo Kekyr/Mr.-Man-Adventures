@@ -4,6 +4,7 @@ using UnityEngine;
 public class OctiColliderListener : MonoBehaviour
 {
     public AudioClip deathSFX;
+    private Puff puff;
     private AudioManager audioManager;
     private PlayerHealth playerHealth;
     private OctiMovement octiMovement;
@@ -18,6 +19,7 @@ public class OctiColliderListener : MonoBehaviour
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
         audioManager = FindObjectOfType<AudioManager>();
+        puff = FindObjectOfType<Puff>();
         octiMovement = GetComponent<OctiMovement>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -58,15 +60,21 @@ public class OctiColliderListener : MonoBehaviour
         }
 
     }
-
+    
     //Уничтожение врага (Octi) после атаки сверху
     private IEnumerator DelayedDestruction()
     {
         gameObject.GetComponent<Animator>().SetBool("IsDead", true);
         gameObject.GetComponent<OctiMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitForSeconds(5);
-        Physics2D.IgnoreLayerCollision(8, 9, false);
+        yield return new WaitForSeconds(0.6f);
         Destroy(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        puff.transform.position = transform.position;
+        puff.destruction = true;
+        Physics2D.IgnoreLayerCollision(8, 9, false);
     }
 }

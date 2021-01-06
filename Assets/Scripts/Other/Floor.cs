@@ -59,7 +59,7 @@ public class Floor : MonoBehaviour
         playerSprite.enabled = false;
         player.transform.position = newPosition;
         playerMovement.enabled = false;
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(2f);
         playerSprite.enabled = true;
         playerHealth.Damage();
         playerMovement.enabled = true;

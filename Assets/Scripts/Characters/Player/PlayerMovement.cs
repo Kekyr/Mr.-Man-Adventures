@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public Collider2D fistCollider;//Коллайдер кулака, включается после удара и выключается по его окончании
     public Collider2D purchaseCollider;
     private AudioManager audioManager;
-    private GameManager gameManager;
     private CharacterController2D characterController;
 
     public float lastHorizontalMove = 0f;
@@ -17,16 +15,11 @@ public class PlayerMovement : MonoBehaviour
     private float runSpeed = 15f; //Скорость перемещения игрока
     private bool jump = false;
     
-    
-
-
-
     private void Start()
     {
         fistCollider.enabled = false;
         purchaseCollider.enabled = false;
         audioManager = FindObjectOfType<AudioManager>();
-        gameManager = FindObjectOfType<GameManager>();
         characterController = GetComponent<CharacterController2D>();
 
     }
@@ -43,11 +36,6 @@ public class PlayerMovement : MonoBehaviour
         
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         
-        if (Input.GetButtonDown("Restart"))
-        {
-            gameManager.RestartGame();
-        }
-
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;

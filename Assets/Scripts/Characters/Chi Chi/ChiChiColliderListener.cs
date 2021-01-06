@@ -4,6 +4,7 @@ public class ChiChiColliderListener : MonoBehaviour
 {
     private PlayerHealth playerHealth;
     private ChiChiMovement chichiMovement;
+    private Puff puff;
 
     public string currentTag;//Тэг сработавшего коллайдера
 
@@ -11,6 +12,8 @@ public class ChiChiColliderListener : MonoBehaviour
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
         chichiMovement = FindObjectOfType<ChiChiMovement>();
+        puff = FindObjectOfType<Puff>();
+
 
         var colliders = GetComponentsInChildren<Collider2D>();
         foreach (var col in colliders)
@@ -51,4 +54,13 @@ public class ChiChiColliderListener : MonoBehaviour
             }
         }
     }
+
+    private void OnDisable()
+    {
+        puff.transform.position = chichiMovement.transform.position;
+        puff.destruction = true;
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+    }
+
+
 }

@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         if (!damaging || falling)
         {
             damaging = true;
-            //hearts[healthPoints - 1].ChangeSprite();
+            hearts[healthPoints - 1].ChangeSprite();
             healthPoints -= 1;
             audioManager.PlaySFX(hurtSFX);
             if (healthPoints <= 0)
