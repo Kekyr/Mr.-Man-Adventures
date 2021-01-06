@@ -25,17 +25,20 @@ public class ChiChiMovement: MonoBehaviour
     private bool facingRight = false;
     private bool flipping = false;
     
-
-    private void Start()
+    private void Awake()
     {
         target = FindObjectOfType<PlayerMovement>().transform;
+
         seeker = GetComponent<Seeker>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(9, 12, true);
-
-        InvokeRepeating("UpdatePath", 0f,.2f);
+        InvokeRepeating("UpdatePath", 0f, .2f);
     }
 
+    //private void Start()
+    //{
+       
+    //}
 
     private void UpdatePath()
     {
@@ -123,13 +126,16 @@ public class ChiChiMovement: MonoBehaviour
             theScale.x *= -1;
             transform.localScale = theScale;
             StartCoroutine(Delay());
+            //flipping = false;
         }
     }
 
     //Задержка
     public IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
         flipping = false;
     }
+
+    
 }

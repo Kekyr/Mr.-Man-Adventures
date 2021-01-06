@@ -13,6 +13,15 @@ public class GameManager : MonoBehaviour
         StartMusic();
     }
 
+    private void Update()
+    {
+        if(Input.GetButtonDown("Restart"))
+        {
+            RestartGame();
+        }
+
+    }
+
     private void StartMusic()
     {
         clipNumber = Random.Range(0, audioClips.Length);

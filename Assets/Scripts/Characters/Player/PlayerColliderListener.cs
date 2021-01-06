@@ -44,9 +44,8 @@ public class PlayerColliderListener : MonoBehaviour
         collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
         collider.gameObject.GetComponent<ChiChiMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitForSeconds(5);
-        Physics2D.IgnoreLayerCollision(8, 9, false);
-        Destroy(collider.gameObject);
+        yield return new WaitForSeconds(0.6f);
+        Destroy(collider.gameObject.transform.parent.gameObject);
         
     }
     
@@ -56,8 +55,7 @@ public class PlayerColliderListener : MonoBehaviour
         collider.gameObject.GetComponentInParent<Animator>().SetBool("IsDead", true);
         collider.gameObject.GetComponentInParent<RollingNeroMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitForSeconds(5);
-        Physics2D.IgnoreLayerCollision(8, 9, false);
+        yield return new WaitForSeconds(1f);
         Destroy(collider.gameObject.transform.parent.gameObject); 
     }
 

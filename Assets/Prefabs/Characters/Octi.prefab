@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSFX: {fileID: 8300000, guid: dba246ce5b2a4fe44b2ddb7d019dc5fb, type: 3}
+  puff: {fileID: 6964921160129121511, guid: ec01577a46097414e8a3ee6387a27f52, type: 3}
   currentTag: 
 --- !u!1 &6277475160686256348
 GameObject:

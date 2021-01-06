@@ -9,6 +9,7 @@ public class NeroColliderListener : MonoBehaviour
     private RollingNeroMovement rollingNeroMovement;
     private Rigidbody2D rigidBody2D;
     private Animator animator;
+    private Puff puff;
     public string currentTag;//Тег сработавшего коллайдера
     
 
@@ -17,6 +18,7 @@ public class NeroColliderListener : MonoBehaviour
     {
         audioManager = FindObjectOfType<AudioManager>();
         playerHealth = FindObjectOfType<PlayerHealth>();
+        puff = FindObjectOfType<Puff>();
         rollingNeroMovement = GetComponent<RollingNeroMovement>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -68,12 +70,18 @@ public class NeroColliderListener : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("IsSquished", true);
         gameObject.GetComponent<RollingNeroMovement>().enabled = false;
         Physics2D.IgnoreLayerCollision(8, 9, true);
-        yield return new WaitForSeconds(5);
-        Physics2D.IgnoreLayerCollision(8, 9, false);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
-    
+    private void OnDisable()
+    {
+        puff.transform.position = transform.position;
+        puff.destruction = true;
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+    }
+
+
 
 
 
