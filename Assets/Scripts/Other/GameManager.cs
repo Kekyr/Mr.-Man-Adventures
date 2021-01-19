@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public AudioClip[] audioClips;
-    private AudioManager audioManager;
+    private AudioManager audioManager; 
     private int clipNumber;
 
     private void Start()
@@ -15,11 +15,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetButtonDown("Restart"))
+        if (Input.GetButtonDown("Restart"))
         {
             RestartGame();
         }
-
     }
 
     private void StartMusic()
@@ -29,12 +28,12 @@ public class GameManager : MonoBehaviour
         if (clipNumber == 0)
         {
             audioManager.PlayMusic(audioClips[clipNumber]);
-            audioManager.PlayMusicWithFade(audioClips[clipNumber + 1],59);
+            audioManager.PlayMusicWithFade(audioClips[clipNumber + 1], 59);
         }
         else
         {
             audioManager.PlayMusic(audioClips[clipNumber]);
-            audioManager.PlayMusicWithFade(audioClips[clipNumber - 1],59);
+            audioManager.PlayMusicWithFade(audioClips[clipNumber - 1], 59);
         }
     }
 
@@ -44,8 +43,12 @@ public class GameManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 11, false);
         Physics2D.IgnoreLayerCollision(8, 12, false);
         Physics2D.IgnoreLayerCollision(8, 0, false);
-        SceneManager.LoadScene(0);
-        
+        LoadCurrentScene();
+    }
+
+    private void LoadCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     

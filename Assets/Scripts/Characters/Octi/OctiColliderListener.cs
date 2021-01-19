@@ -48,6 +48,7 @@ public class OctiColliderListener : MonoBehaviour
             }
             else if (currentTag == "OctiBody")
             {
+                Debug.Log("Octi damage");
                 playerHealth.Damage();
             }
         }

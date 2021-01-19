@@ -16,6 +16,8 @@ TagManager:
   - Purchase
   - RollingNeroBody
   - OctiBody
+  - SecondPicture
+  - FirstPicture
   layers:
   - Default
   - TransparentFX

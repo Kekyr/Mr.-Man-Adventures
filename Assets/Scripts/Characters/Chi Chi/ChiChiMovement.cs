@@ -28,17 +28,11 @@ public class ChiChiMovement: MonoBehaviour
     private void Awake()
     {
         target = FindObjectOfType<PlayerMovement>().transform;
-
         seeker = GetComponent<Seeker>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(9, 12, true);
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
-
-    //private void Start()
-    //{
-       
-    //}
 
     private void UpdatePath()
     {
@@ -46,7 +40,7 @@ public class ChiChiMovement: MonoBehaviour
         {
             if (target != null)
             {
-                destination = target.position + new Vector3(1f, 0);
+                destination = target.position;
                 seeker.StartPath(rigidBody2D.position, destination, OnPathComplete);
             }
         }
@@ -126,7 +120,6 @@ public class ChiChiMovement: MonoBehaviour
             theScale.x *= -1;
             transform.localScale = theScale;
             StartCoroutine(Delay());
-            //flipping = false;
         }
     }
 
