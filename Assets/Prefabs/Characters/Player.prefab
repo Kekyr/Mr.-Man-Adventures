@@ -44,7 +44,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4071617, y: 0.29965568}
+  m_Offset: {x: 0.010368109, y: 0.2468909}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05757904, y: 0.36409044}
+  m_Size: {x: 0.085109234, y: 0.2585609}
   m_EdgeRadius: 0
 --- !u!1 &1937450932471679506
 GameObject:
@@ -233,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02905655, y: 0.214782}
+  m_Offset: {x: 0.0005431175, y: 0.21953428}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -244,7 +244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.56476307, y: 0.45153046}
+  m_Size: {x: 0.56476307, y: 0.4420259}
   m_EdgeRadius: 0
 --- !u!58 &1937450932676944329
 CircleCollider2D:
@@ -259,9 +259,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.025962591, y: -0.17309219}
+  m_Offset: {x: -0.02947998, y: -0.16627383}
   serializedVersion: 2
-  m_Radius: 0.32141942
+  m_Radius: 0.3288579
 --- !u!114 &9076983351064929049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,10 +291,11 @@ MonoBehaviour:
   jumpSFX: {fileID: 8300000, guid: 5f406c09e7a39754e8ee2ac514a373f5, type: 3}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 6144
+    m_Bits: 2048
   groundCheck: {fileID: 1937450932471679507}
-  jumpForce: 0.05
+  jumpForce: 0.055
   movementSmoothing: 0.05
+  grounded: 0
 --- !u!114 &1937450932676944335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +313,7 @@ MonoBehaviour:
   animator: {fileID: 1937450932676944322}
   fistCollider: {fileID: 8676990201010531060}
   purchaseCollider: {fileID: 2068155613}
-  runSpeed: 15
+  lastHorizontalMove: 0
   horizontalMove: 0
 --- !u!114 &7662961495376449854
 MonoBehaviour:

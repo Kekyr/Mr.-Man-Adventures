@@ -11,6 +11,7 @@ public class Floor : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerHealth playerHealth;
     private SpriteRenderer playerSprite;
+    private Rigidbody2D rigidBody2D;
 
     [SerializeField] private Vector3 newPosition;
     [SerializeField] private Collider2D[] tiles;
@@ -26,6 +27,8 @@ public class Floor : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         playerSprite = player.GetComponent<SpriteRenderer>();
         playerMovement = player.GetComponent<PlayerMovement>();
+        rigidBody2D = player.GetComponent<Rigidbody2D>();
+        rigidBody2D.velocity = Vector3.zero;
         healthPoints = playerHealth.healthPoints;
         playerHealth.falling = true;
         direction = playerMovement.lastHorizontalMove;
@@ -56,12 +59,13 @@ public class Floor : MonoBehaviour
 
     public IEnumerator Delay()
     {
+        playerHealth.Damage();
         playerSprite.enabled = false;
         player.transform.position = newPosition;
         playerMovement.enabled = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         playerSprite.enabled = true;
-        playerHealth.Damage();
+        Debug.Log("Floor damage");
         playerMovement.enabled = true;
     }
 

@@ -3,7 +3,7 @@
 public class MovingCamera : MonoBehaviour
 {
     public Transform target;
-    public Transform background;
+    public Transform backgrounds;
 
     public float smoothTime = 0.3f;
     private Vector3 cameraVelocity = Vector3.zero;
@@ -24,13 +24,16 @@ public class MovingCamera : MonoBehaviour
             CameraNewPosition = target.TransformPoint(new Vector3(0, 0, -1));
             BackgroundNewPosition = target.TransformPoint(new Vector3(0, 0, 1));
 
-            BackgroundNewPosition.y = 3.54f;
+            BackgroundNewPosition.y = 0f;
             CameraNewPosition.y = 3.54f;
+            BackgroundNewPosition.z = 0;
 
             if (((CameraNewPosition.x > pastXPosition) && (BackgroundNewPosition.x > pastXPosition)))
             {
                 transform.position = Vector3.SmoothDamp(transform.position, CameraNewPosition, ref cameraVelocity, smoothTime);
-                background.position = Vector3.SmoothDamp(background.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);
+
+                backgrounds.position = Vector3.SmoothDamp(backgrounds.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);
+              
                 pastXPosition = target.position.x;
             }
         }
