@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         fistCollider.enabled = false;
         purchaseCollider.enabled = false;
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
         characterController = GetComponent<CharacterController2D>();
 
     }

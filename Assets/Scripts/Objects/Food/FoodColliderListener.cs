@@ -15,7 +15,7 @@ public class FoodColliderListener : MonoBehaviour
 
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerWallet = FindObjectOfType<PlayerWallet>();
 

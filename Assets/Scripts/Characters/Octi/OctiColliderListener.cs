@@ -18,7 +18,7 @@ public class OctiColliderListener : MonoBehaviour
     private void Start()
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
         puff = FindObjectOfType<Puff>();
         octiMovement = GetComponent<OctiMovement>();
         rigidBody2D = GetComponent<Rigidbody2D>();

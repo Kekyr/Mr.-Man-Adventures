@@ -2,15 +2,17 @@
 
 public class Label : MonoBehaviour
 {
-    private Animator animator;
-    
-    void Start()
+    private void Update()
     {
-        animator = GetComponent<Animator>();
+        if (Input.anyKeyDown)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void Update()
+    private void OnDisable()
     {
-        animator.SetTrigger("Flick");
+        FindObjectOfType<Menu>().startMenu = true;
     }
+ 
 }

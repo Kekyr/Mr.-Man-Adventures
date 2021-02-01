@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: -5287438269411145907
     second: Label_0
+  - first:
+      213: -3409900731294071415
+    second: Label_0
+  - first:
+      213: -7956794561628759053
+    second: Label_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -104,8 +110,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4741f378ee3f96b0800000000000000
-      internalID: -5287438269411145907
+      spriteID: 9854fdfe9599da0d0800000000000000
+      internalID: -3409900731294071415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Label_1
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 352
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fb9b5bc089c39190800000000000000
+      internalID: -7956794561628759053
       vertices: []
       indices: 
       edges: []

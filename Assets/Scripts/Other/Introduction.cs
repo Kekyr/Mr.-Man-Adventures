@@ -95,7 +95,7 @@ public class Introduction : MonoBehaviour
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Common.LoadNextScene();
     }
 
 

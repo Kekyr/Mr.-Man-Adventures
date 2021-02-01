@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
     }
 
     //Нанесение урона игроку

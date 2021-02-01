@@ -26,7 +26,7 @@ public class CharacterController2D : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         common = FindObjectOfType<Common>();
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
     }
 
     //Проверка приземления игрока

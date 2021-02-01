@@ -3,22 +3,42 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance { get; private set; }
+    
     private AudioSource musicSource;
     private AudioSource musicSource2;
+    private AudioSource[] musicSources;
     private AudioSource sfxSource;
 
+    public bool isSFXWorking;
+    public bool isMusicWorking;
     private bool firstMusicSourceIsPlaying;
+    
 
 
     private void Awake()
     {
-        musicSource = gameObject.AddComponent<AudioSource>();
-        musicSource2 = gameObject.AddComponent<AudioSource>();
+        if(instance==null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        musicSources = GetComponents<AudioSource>();
+        musicSource = musicSources[0];
+        musicSource2 = musicSources[1];
         sfxSource = gameObject.AddComponent<AudioSource>();
 
+        isSFXWorking = true;
+        isMusicWorking = true;
         musicSource.loop = true;
         musicSource2.loop = true;
     }
+
 
     public void PlayMusic(AudioClip musicClip)
     {
@@ -26,7 +46,7 @@ public class AudioManager : MonoBehaviour
         
         activeSource.clip = musicClip;
         activeSource.Play();
-        activeSource.volume = 0.1f;
+
     }
 
     public void StopMusic()
@@ -36,7 +56,24 @@ public class AudioManager : MonoBehaviour
         activeSource.Stop();
     }
 
-   
+    public void StartMusic(int clipNumber, AudioClip[] audioClips)
+    {
+        if (isMusicWorking)
+        {
+            if (clipNumber == 0)
+            {
+                PlayMusic(audioClips[clipNumber]);
+                PlayMusicWithFade(audioClips[clipNumber + 1], 59);
+            }
+            else
+            {
+                PlayMusic(audioClips[clipNumber]);
+                PlayMusic(audioClips[clipNumber]);
+                PlayMusicWithFade(audioClips[clipNumber - 1], 59);
+            }
+        }
+    }
+
 
     public void PlayMusicWithFade(AudioClip newClip, float transitionTime=1.0f)
     {
@@ -44,20 +81,8 @@ public class AudioManager : MonoBehaviour
 
         StartCoroutine(UpdateMusicWithFade(activeSource, newClip, transitionTime));
 
-        activeSource.volume = 0.1f;
     }
 
-    public void PlayMusicWithCrossFade(AudioClip musicClip, float transitionTime=1.0f)
-    {
-        AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
-        AudioSource newSource = firstMusicSourceIsPlaying ? musicSource2 : musicSource;
-
-        firstMusicSourceIsPlaying = !firstMusicSourceIsPlaying;
-
-        newSource.clip = musicClip;
-        newSource.Play();
-        StartCoroutine(UpdateMusicWithCrossFade(activeSource, newSource, transitionTime));
-    }
 
     private IEnumerator UpdateMusicWithFade(AudioSource activeSource, AudioClip newClip, float transitionTime)
     {
@@ -70,7 +95,7 @@ public class AudioManager : MonoBehaviour
 
         for(t=0; t<transitionTime; t+=Time.deltaTime)
         {
-            activeSource.volume = (1 - (t / transitionTime));
+            activeSource.volume += (1 - (t / transitionTime));
             yield return null;
         }
 
@@ -80,27 +105,22 @@ public class AudioManager : MonoBehaviour
 
         for (t = 0; t < transitionTime; t += Time.deltaTime)
         {
-            activeSource.volume = (t / transitionTime);
+            activeSource.volume += (t / transitionTime);
             yield return null;
         }
     }
 
-    private IEnumerator UpdateMusicWithCrossFade(AudioSource original, AudioSource newSource, float transitionTime)
+    public void StopUpdateMusicWithFade()
     {
-        float t = 0.0f;
-
-        for(t=0.0f; t<=transitionTime; t+=Time.deltaTime)
-        {
-            original.volume = (1 - (t / transitionTime));
-            newSource.volume=(t / transitionTime);
-            yield return null;
-        }
-
-        original.Stop();
+        StopCoroutine("UpdateMusicWithFade");
     }
+
     public void PlaySFX(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        if (isSFXWorking)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
     }
 
     public void StopSFX()
@@ -110,7 +130,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip, float volume)
     {
-        sfxSource.PlayOneShot(clip, volume);
+
+        if (isSFXWorking)
+        {
+            sfxSource.PlayOneShot(clip, volume);
+        }
     }
 
     public void SetMusicVolume(float volume)
