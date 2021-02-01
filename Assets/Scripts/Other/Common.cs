@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Common : MonoBehaviour
 {
@@ -18,6 +19,14 @@ public class Common : MonoBehaviour
 			flipping = false;
 		}
 	}
+
+	public static void LoadNextScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
+
+	
+
 
 	
 

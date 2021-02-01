@@ -16,7 +16,7 @@ public class NeroColliderListener : MonoBehaviour
     //Подключение коллайдеров детей
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
         playerHealth = FindObjectOfType<PlayerHealth>();
         puff = FindObjectOfType<Puff>();
         rollingNeroMovement = GetComponent<RollingNeroMovement>();

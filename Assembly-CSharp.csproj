@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\NeroColliderBridge.cs" />
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\NeroColliderListener.cs" />
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\RollingNeroMovement.cs" />
+    <Compile Include="Assets\Scripts\Objects\AudioButton.cs" />
     <Compile Include="Assets\Scripts\Objects\CoinColliderListener.cs" />
     <Compile Include="Assets\Scripts\Objects\Food\FoodColliderBridge.cs" />
     <Compile Include="Assets\Scripts\Objects\Food\FoodColliderListener.cs" />
@@ -89,7 +90,9 @@
     <Compile Include="Assets\Scripts\Other\GameManager.cs" />
     <Compile Include="Assets\Scripts\Other\Introduction.cs" />
     <Compile Include="Assets\Scripts\Other\Label.cs" />
+    <Compile Include="Assets\Scripts\Other\Menu.cs" />
     <Compile Include="Assets\Scripts\Other\MovingCamera.cs" />
+    <Compile Include="Assets\Scripts\Other\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Other\Picture.cs" />
     <Compile Include="Assets\Scripts\Other\Puff.cs" />
     <Compile Include="Assets\Scripts\Other\TextLocalizer.cs" />

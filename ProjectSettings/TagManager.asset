@@ -18,6 +18,9 @@ TagManager:
   - OctiBody
   - SecondPicture
   - FirstPicture
+  - Name
+  - Button
+  - AudioButton
   layers:
   - Default
   - TransparentFX

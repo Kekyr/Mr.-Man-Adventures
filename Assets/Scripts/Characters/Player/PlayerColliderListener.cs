@@ -10,7 +10,7 @@ public class PlayerColliderListener : MonoBehaviour
     //Подключение коллайдеров детей
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
         animator = GetComponentInParent<Animator>();
         var collider = GetComponentInChildren<Collider2D>();
         if (collider.gameObject != gameObject)

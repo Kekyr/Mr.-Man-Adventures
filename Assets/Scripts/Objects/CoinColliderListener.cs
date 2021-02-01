@@ -10,7 +10,7 @@ public class CoinColliderListener : MonoBehaviour
 
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance;
         playerWallet = FindObjectOfType<PlayerWallet>();
     }
 

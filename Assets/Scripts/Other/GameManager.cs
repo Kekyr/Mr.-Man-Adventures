@@ -4,13 +4,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public AudioClip[] audioClips;
-    private AudioManager audioManager; 
+    private AudioManager audioManager;
+
+    public bool startMusic;
     private int clipNumber;
+    
 
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
-        StartMusic();
+        audioManager = AudioManager.instance;
+        clipNumber = Random.Range(0, audioClips.Length);
+        startMusic = true;
     }
 
     private void Update()
@@ -19,21 +23,11 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
-    }
 
-    private void StartMusic()
-    {
-        clipNumber = Random.Range(0, audioClips.Length);
-
-        if (clipNumber == 0)
+        if(startMusic)
         {
-            audioManager.PlayMusic(audioClips[clipNumber]);
-            audioManager.PlayMusicWithFade(audioClips[clipNumber + 1], 59);
-        }
-        else
-        {
-            audioManager.PlayMusic(audioClips[clipNumber]);
-            audioManager.PlayMusicWithFade(audioClips[clipNumber - 1], 59);
+            audioManager.StartMusic(clipNumber, audioClips);
+            startMusic = false;
         }
     }
 
