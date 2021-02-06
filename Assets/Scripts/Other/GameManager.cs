@@ -3,17 +3,33 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioClip[] audioClips;
+    public static GameManager instance { get; private set; }
+
+    public AudioClip[] menuAudioClips;
+    public AudioClip[] gameAudioClips;
     private AudioManager audioManager;
 
     public bool startMusic;
-    private int clipNumber;
-    
+    private int menuClipNumber;
+    private int gameClipNumber;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         audioManager = AudioManager.instance;
-        clipNumber = Random.Range(0, audioClips.Length);
+        menuClipNumber = Random.Range(0, menuAudioClips.Length);
+        gameClipNumber = Random.Range(0, gameAudioClips.Length);
         startMusic = true;
     }
 
@@ -26,7 +42,18 @@ public class GameManager : MonoBehaviour
 
         if(startMusic)
         {
-            audioManager.StartMusic(clipNumber, audioClips);
+            if (SceneManager.GetActiveScene().buildIndex==0)
+            {
+                audioManager.StopUpdateMusicWithFade();
+                audioManager.StopMusic();
+                audioManager.StartMusic(menuClipNumber, menuAudioClips);
+            }
+            else if(SceneManager.GetActiveScene().buildIndex==3)
+            {
+                audioManager.StopUpdateMusicWithFade();
+                audioManager.StopMusic();
+                audioManager.StartMusic(gameClipNumber, gameAudioClips);
+            }
             startMusic = false;
         }
     }

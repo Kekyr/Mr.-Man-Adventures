@@ -78,11 +78,11 @@
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\NeroColliderBridge.cs" />
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\NeroColliderListener.cs" />
     <Compile Include="Assets\Scripts\Characters\Rolling Nero\RollingNeroMovement.cs" />
-    <Compile Include="Assets\Scripts\Objects\AudioButton.cs" />
     <Compile Include="Assets\Scripts\Objects\CoinColliderListener.cs" />
     <Compile Include="Assets\Scripts\Objects\Food\FoodColliderBridge.cs" />
     <Compile Include="Assets\Scripts\Objects\Food\FoodColliderListener.cs" />
     <Compile Include="Assets\Scripts\Objects\Heart.cs" />
+    <Compile Include="Assets\Scripts\Other\AudioButton.cs" />
     <Compile Include="Assets\Scripts\Other\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Other\Common.cs" />
     <Compile Include="Assets\Scripts\Other\EndOfTheLevel.cs" />
@@ -154,6 +154,7 @@
     <None Include="Assets\Sprites\Mini UI\KenneyPixelUiPack\Spritesheet\spritesheetInfo.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Text\Text.txt" />
     <None Include="Assets\Sprites\Characters\Sprite Pack 3\LICENSE.txt" />
     <None Include="Assets\Plans\Диздок.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />

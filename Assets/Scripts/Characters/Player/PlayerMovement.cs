@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         purchaseCollider.enabled = false;
         audioManager = AudioManager.instance;
         characterController = GetComponent<CharacterController2D>();
+        GameManager.instance.startMusic = true;
 
     }
 

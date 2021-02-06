@@ -3,14 +3,14 @@
 public class MovingCamera : MonoBehaviour
 {
     public Transform target;
-    public Transform backgrounds;
+    public Transform background;
 
-    public float smoothTime = 0.3f;
+    private float smoothTime = 0.3f;
     private Vector3 cameraVelocity = Vector3.zero;
     private Vector3 backgroundVelocity = Vector3.zero;
     private Vector3 CameraNewPosition;
     private Vector3 BackgroundNewPosition;
-    private float pastXPosition = 6;
+    private float pastXPosition = -5.25f;
     
 
     private void Start()
@@ -24,15 +24,15 @@ public class MovingCamera : MonoBehaviour
             CameraNewPosition = target.TransformPoint(new Vector3(0, 0, -1));
             BackgroundNewPosition = target.TransformPoint(new Vector3(0, 0, 1));
 
-            BackgroundNewPosition.y = 0f;
+            BackgroundNewPosition.y = 3.54f;
             CameraNewPosition.y = 3.54f;
-            BackgroundNewPosition.z = 0;
+            BackgroundNewPosition.z = 3;
 
             if (((CameraNewPosition.x > pastXPosition) && (BackgroundNewPosition.x > pastXPosition)))
             {
                 transform.position = Vector3.SmoothDamp(transform.position, CameraNewPosition, ref cameraVelocity, smoothTime);
 
-                backgrounds.position = Vector3.SmoothDamp(backgrounds.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);
+                background.position = Vector3.SmoothDamp(background.position, BackgroundNewPosition, ref backgroundVelocity, smoothTime);
               
                 pastXPosition = target.position.x;
             }
