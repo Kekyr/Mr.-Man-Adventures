@@ -11,7 +11,7 @@ public class PlayerWallet : MonoBehaviour
 
     private void Awake()
     {
-        numberOfCoins = FindObjectOfType<TextMeshProUGUI>();
+        numberOfCoins = GameObject.FindGameObjectWithTag("NumberOfCoins").GetComponent<TextMeshProUGUI>();
     }
     public void AddCoin()
     {

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 6948b30e24010e6499433e525ca128a6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gouranga
+  fontNames:
+  - Gouranga
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 466dd7e537883674bab2617be0282c84, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

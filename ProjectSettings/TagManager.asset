@@ -21,6 +21,7 @@ TagManager:
   - Name
   - Button
   - AudioButton
+  - NumberOfCoins
   layers:
   - Default
   - TransparentFX

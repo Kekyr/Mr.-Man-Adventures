@@ -11,23 +11,23 @@ public class PauseMenu : MonoBehaviour
     private GameObject[] buttons;
     private AudioManager audioManager;
     private GameManager gameManager;
+    private bool settingsIsClosed=true;
 
 
     void Start()
     {
         audioManager = AudioManager.instance;
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         buttons = GameObject.FindGameObjectsWithTag("Button");
         audioButtons = GameObject.FindGameObjectsWithTag("AudioButton");
-
     }
 
     
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && settingsIsClosed)
         {
-            if(gameIsPaused)
+            if (gameIsPaused)
             {
                 Resume();
             }
@@ -40,27 +40,31 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        ButtonSwitch(true);
+        Common.ButtonSwitch(buttons,true);
         Time.timeScale = 0f;
         gameIsPaused = true;
         audioManager.StopUpdateMusicWithFade();
         audioManager.StopMusic();
-        audioManager.isMusicWorking = false;
     }
 
     public void Resume()
     {
-        ButtonSwitch(false);
+        Common.ButtonSwitch(buttons,false);
         Time.timeScale = 1f;
         gameIsPaused = false;
-        audioManager.isMusicWorking = true;
         gameManager.startMusic = true;
     }
 
     public void Settings()
     {
-        ButtonSwitch(false);
-        AudioButtonSwitch(true);
+        settingsIsClosed = false;
+        Common.ButtonSwitch(buttons,false);
+        Common.AudioButtonSwitch(audioButtons, true);
+    }
+
+    public void Quit()
+    {
+        Common.Quit();
     }
 
     public void MainMenu()
@@ -68,33 +72,15 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
     public void Back()
     {
-        AudioButtonSwitch(false);
-        ButtonSwitch(true);
+        Common.AudioButtonSwitch(audioButtons,false);
+        Common.ButtonSwitch(buttons,true);
+        settingsIsClosed = true;
     }
 
-    private void ButtonSwitch(bool selector)
-    {
-        foreach (var button in buttons)
-        {
-            button.GetComponent<Image>().enabled = selector;
-            button.GetComponentInChildren<TextMeshProUGUI>().enabled = selector;
-        }
-    }
+    
 
-    private void AudioButtonSwitch(bool selector)
-    {
-        foreach (var audioButton in audioButtons)
-        {
-            audioButton.GetComponent<Image>().enabled = selector;
-            audioButton.GetComponentInChildren<TextMeshProUGUI>().enabled = selector;
-        }
-    }
+    
 
 }
