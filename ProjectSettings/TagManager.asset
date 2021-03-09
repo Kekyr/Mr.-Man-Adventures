@@ -20,8 +20,11 @@ TagManager:
   - FirstPicture
   - Name
   - Button
-  - AudioButton
   - NumberOfCoins
+  - SettingsButton
+  - Wall
+  - CameraEnd
+  - PlayerEnd
   layers:
   - Default
   - TransparentFX

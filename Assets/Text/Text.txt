@@ -4,20 +4,37 @@
 
 1. Это был самый обычный день. Mr.Man и Twiggy просто стояли у дерева и болтали.
 
-2. Внезапно, Mr. Man почувстовал запах чего-то вкусного и пошел на него. Twiggy была немного удивлена.
+2. Внезапно, Mr. Man почувствовал запах чего-то вкусного и пошел на него. Twiggy была немного удивлена.
 
 3. Затем Mr.Man увидел к чему ведёт этот прекрасный запах - к стопке вкусных блинчиков с маслицем.
 
-4. Удивление Twiggy переросло в недоумение.
+4. Twiggy была в шоке от происходящего.
 
 5. Вдруг из кустов вышел орк. Он был очень рад встрече с Twiggy...
 
-6. Когда Mr.Man cъел блинчики и вернулся к дереву, он наткнулся на записку, в ней Twiggy написала, 
+6. Когда Mr.Man cъел блинчики и вернулся к дереву, он наткнулся на записку, в ней Twiggy написала,
 что её похитил злобный орк.
 
-7. В начале Mr.Manу стало грустно и обидно.
+7. В начале ему стало грустно и обидно.
 
-8. Но через какое-то время он воспрял духом и решил во чтобы то ни стало спасти Twiggy!
+8. Но через какое-то время он воспрял духом и решил во что бы то ни стало спасти Twiggy!
+
+Обучение:
+
+1. Используйте кнопки A и D, чтобы перемещаться по миру игры.
+
+2. Нажмите на SPACE, чтобы подпрыгнуть.
+
+3. Нажмите на E, чтобы ударить противника.
+
+4. Вы можете убивать противника двумя способами: ударом кулака и прыжком.
+
+5. Чтобы купить еду в конце уровня нажмите на Q.
+
+Концовка:
+
+Поздравляю! Ты сделал это! Судя по всему ты ас в играх.
+Спасибо за игру! Буду очень благодарен за отзыв!
 
 
 Английская версия:
@@ -30,16 +47,35 @@ Introduction:
 
 3. Then Mr.Man saw where it leads - to a stack of pancakes with butter.
 
-4. Surprise turned to bewilderment.
+4. Twiggy was shocked by what was happening.
 
 5. At once an orc came out of the bushes. He was very glad to meet Twiggy...
 
 6. When Mr.Man ate pancakes and returned to the tree, he came across a note, in which Twiggy wrote that she was kidnapped
 by an evil orc.
 
-7. At first, Mr. Man felt sad and hurt.
+7. At first, he felt sad and hurt.
 
 8. But after some time, he perked up and decided at all costs to save Twiggy
+
+Tutorial:
+
+1. Use the A, D buttons to move around the game world.
+
+2. Use SPACE to jump.
+
+3. Use E to punch enemy.
+
+4. You can kill opponents in two ways: with a punch and a jump.
+
+5. Use Q to buy food at the end of the level.
+
+Ending:
+
+Congratulations! You did this! You are a true hardcore gamer.
+Besides, thank you for playing! I will appreciate any feedback.
+
+
 
 
 

@@ -28,49 +28,37 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioManager = AudioManager.instance;
-        menuClipNumber = Random.Range(0, menuAudioClips.Length);
-        gameClipNumber = Random.Range(0, gameAudioClips.Length);
+        
         startMusic = true;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Restart"))
-        {
-            RestartGame();
-        }
-
         if(startMusic)
         {
-            if (SceneManager.GetActiveScene().buildIndex==0)
-            {
-                audioManager.StopUpdateMusicWithFade();
-                audioManager.StopMusic();
-                audioManager.StartMusic(menuClipNumber, menuAudioClips);
-            }
-            else if(SceneManager.GetActiveScene().buildIndex==3)
-            {
-                audioManager.StopUpdateMusicWithFade();
-                audioManager.StopMusic();
-                audioManager.StartMusic(gameClipNumber, gameAudioClips);
-            }
-            startMusic = false;
+            CheckScene();
         }
     }
 
-    public void RestartGame()
+    private void CheckScene()
     {
-        Physics2D.IgnoreLayerCollision(8, 9, false);
-        Physics2D.IgnoreLayerCollision(8, 11, false);
-        Physics2D.IgnoreLayerCollision(8, 12, false);
-        Physics2D.IgnoreLayerCollision(8, 0, false);
-        LoadCurrentScene();
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            audioManager.StopMusic();
+            menuClipNumber = Random.Range(0, menuAudioClips.Length);
+            audioManager.StartMusic(menuClipNumber, menuAudioClips);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            audioManager.StopMusic();
+            gameClipNumber = Random.Range(0, gameAudioClips.Length);
+            audioManager.StartMusic(gameClipNumber, gameAudioClips);
+
+        }
+        startMusic = false;
     }
 
-    private void LoadCurrentScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
 
     
 }

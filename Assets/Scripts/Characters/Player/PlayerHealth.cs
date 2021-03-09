@@ -36,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
             if (healthPoints <= 0)
             {
                 audioManager.StopMusic();
+                audioManager.StopUpdateMusicWithFade();
                 audioManager.PlaySFX(deathSFX);
                 StartCoroutine(DelayedDestruction());
             }
@@ -77,7 +78,8 @@ public class PlayerHealth : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 11, true);
         Physics2D.IgnoreLayerCollision(8, 12, true);
         Physics2D.IgnoreLayerCollision(8, 0, true);
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(3);
+        Common.LoadNextScene();
     }
+
 }

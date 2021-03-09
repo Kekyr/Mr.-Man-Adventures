@@ -6,7 +6,7 @@ public class PlayerWallet : MonoBehaviour
     public TextMeshProUGUI numberOfCoins;
 
     public float amountOfCoins=0;
-
+    private string countOfCoins;
     // Подсчёт собранных монет
 
     private void Awake()
@@ -16,21 +16,34 @@ public class PlayerWallet : MonoBehaviour
     public void AddCoin()
     {
         amountOfCoins++;
-        numberOfCoins.text = ((amountOfCoins / 100).ToString()).Replace(",", string.Empty);
-        if(amountOfCoins%10==0)
+        countOfCoins= (amountOfCoins / 100).ToString();
+
+        if (amountOfCoins % 10 == 0)
         {
-            numberOfCoins.text += "0";
+            countOfCoins = countOfCoins[0].ToString() + countOfCoins[2].ToString()+"0";
         }
+        else
+        {
+            countOfCoins = countOfCoins[0].ToString() + countOfCoins[2].ToString() + countOfCoins[3].ToString();
+        }
+        numberOfCoins.text = countOfCoins;
+        
     }
 
     public void DeleteCoins(int amount)
     {
         amountOfCoins -= amount;
-        numberOfCoins.text = ((amountOfCoins / 100).ToString()).Replace(",", string.Empty);
+        countOfCoins= (amountOfCoins / 100).ToString();
+        
         if (amountOfCoins % 10 == 0)
         {
-            numberOfCoins.text += "0";
+            countOfCoins = countOfCoins[0].ToString() + countOfCoins[2].ToString() + "0";
         }
+        else
+        {
+            countOfCoins = countOfCoins[0].ToString() + countOfCoins[2].ToString() + countOfCoins[3].ToString();
+        }
+        numberOfCoins.text = countOfCoins;
 
     }
 }

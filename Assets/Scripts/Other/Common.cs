@@ -1,11 +1,14 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Common : MonoBehaviour
 {
+	private TextMeshProUGUI text;
 	private bool flipping = false;
+	private int currentId;
 	
 	//Изменение направления спрайта
 	public void Flip(ref bool facingRight, GameObject gameObject)
@@ -27,12 +30,12 @@ public class Common : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
-	public static void AudioButtonSwitch(GameObject[] audioButtons, bool selector)
+	public static void SettingsButtonSwitch(GameObject[] settingsButtons, bool selector)
 	{
-		foreach (var audioButton in audioButtons)
+		foreach (var settingsButton in settingsButtons)
 		{
-			audioButton.GetComponent<Image>().enabled = selector;
-			audioButton.GetComponentInChildren<TextMeshProUGUI>().enabled = selector;
+			settingsButton.GetComponent<Image>().enabled = selector;
+			settingsButton.GetComponentInChildren<TextMeshProUGUI>().enabled = selector;
 		}
 	}
 
@@ -45,10 +48,51 @@ public class Common : MonoBehaviour
 		}
 	}
 
+
 	public static void Quit()
 	{
 		Application.Quit();
 	}
+
+	public static void MainMenu()
+	{
+		Menu.fromGame = true;
+		SceneManager.LoadScene(0);
+	}
+
+	public void ChangeText(GameObject[] buttons, bool changeLanguage, List<string> ids)
+	{
+		for (int i = 0; i < buttons.Length; i++)
+		{
+			text = buttons[i].GetComponentInChildren<TextMeshProUGUI>();
+
+			if (!changeLanguage)
+			{
+				ids.Add(text.text);
+			}
+
+			text.font = TextLocalizer.CurrentFont;
+
+			text.fontSize = TextLocalizer.CurrentFontSize;
+
+			if (!changeLanguage)
+			{
+				text.text = TextLocalizer.ResolveStringValue("menu_" + text.text);
+			}
+			else
+			{
+				text.text = TextLocalizer.ResolveStringValue("menu_" + ids[currentId]);
+				currentId++;
+
+				if (currentId == ids.Count)
+				{
+					currentId = 0;
+				}
+			}
+		}
+	}
+
+
 
 
 

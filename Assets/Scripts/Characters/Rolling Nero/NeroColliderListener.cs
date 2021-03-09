@@ -76,9 +76,12 @@ public class NeroColliderListener : MonoBehaviour
 
     private void OnDisable()
     {
-        puff.transform.position = transform.position;
-        puff.destruction = true;
-        Physics2D.IgnoreLayerCollision(8, 9, false);
+        if (puff != null)
+        {
+            puff.transform.position = transform.position;
+            puff.destruction = true;
+            Physics2D.IgnoreLayerCollision(8, 9, false);
+        }
     }
 
 

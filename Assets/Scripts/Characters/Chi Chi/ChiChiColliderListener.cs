@@ -57,9 +57,12 @@ public class ChiChiColliderListener : MonoBehaviour
 
     private void OnDisable()
     {
-        puff.transform.position = chichiMovement.transform.position;
-        puff.destruction = true;
-        Physics2D.IgnoreLayerCollision(8, 9, false);
+        if (puff != null)
+        {
+            puff.transform.position = chichiMovement.transform.position;
+            puff.destruction = true;
+            Physics2D.IgnoreLayerCollision(8, 9, false);
+        }
     }
 
 

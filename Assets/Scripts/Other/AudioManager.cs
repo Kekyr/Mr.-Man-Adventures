@@ -6,14 +6,14 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance { get; private set; }
     
     private AudioSource musicSource;
-    private AudioSource musicSource2;
-    private AudioSource[] musicSources;
+    //private AudioSource musicSource2;
     private AudioSource sfxSource;
+    //private AudioSource activeSource;
+    private IEnumerator updateMusicWithFade;
 
     public bool isSFXWorking;
     public bool isMusicWorking;
-    private bool firstMusicSourceIsPlaying;
-    
+    //private bool firstMusicSourceIsPlaying;
 
 
     private void Awake()
@@ -28,32 +28,43 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        musicSources = GetComponents<AudioSource>();
-        musicSource = musicSources[0];
-        musicSource2 = musicSources[1];
-        sfxSource = gameObject.AddComponent<AudioSource>();
+        musicSource = GetComponent<AudioSource>();
+        //musicSource2 = GetComponent<AudioSource>();
+        sfxSource = GetComponent<AudioSource>();
 
         isSFXWorking = true;
         isMusicWorking = true;
-        musicSource.loop = true;
-        musicSource2.loop = true;
     }
 
 
     public void PlayMusic(AudioClip musicClip)
     {
-        AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
+        //AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
         
-        activeSource.clip = musicClip;
-        activeSource.Play();
+        musicSource.clip = musicClip;
+        musicSource.Play();
+    }
 
+    public void PlayMusic()
+    {
+        //AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
+
+        musicSource.Play();
     }
 
     public void StopMusic()
     {
-        AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
+        //AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
 
-        activeSource.Stop();
+        musicSource.Stop();
+        StopUpdateMusicWithFade();
+    }
+
+    public void PauseMusic()
+    {
+        //AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
+
+        musicSource.Pause();
     }
 
     public void StartMusic(int clipNumber, AudioClip[] audioClips)
@@ -63,13 +74,12 @@ public class AudioManager : MonoBehaviour
             if (clipNumber == 0)
             {
                 PlayMusic(audioClips[clipNumber]);
-                PlayMusicWithFade(audioClips[clipNumber + 1], 59);
+                PlayMusicWithFade(audioClips[clipNumber + 1], audioClips[clipNumber].length);
             }
             else
             {
                 PlayMusic(audioClips[clipNumber]);
-                PlayMusic(audioClips[clipNumber]);
-                PlayMusicWithFade(audioClips[clipNumber - 1], 59);
+                PlayMusicWithFade(audioClips[clipNumber - 1], audioClips[clipNumber].length);
             }
         }
     }
@@ -77,42 +87,43 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusicWithFade(AudioClip newClip, float transitionTime=1.0f)
     {
-        AudioSource activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
+        //activeSource = firstMusicSourceIsPlaying ? musicSource : musicSource2;
 
-        StartCoroutine(UpdateMusicWithFade(activeSource, newClip, transitionTime));
-
+        updateMusicWithFade = UpdateMusicWithFade(musicSource, newClip, transitionTime);
+        
+        StartCoroutine(updateMusicWithFade);
+        
+        
     }
 
 
-    private IEnumerator UpdateMusicWithFade(AudioSource activeSource, AudioClip newClip, float transitionTime)
+    private IEnumerator UpdateMusicWithFade(AudioSource musicSource, AudioClip newClip, float transitionTime)
     {
-        if(!activeSource.isPlaying)
-        {
-            activeSource.Play();
-        }
-
         float t = 0.0f;
 
         for(t=0; t<transitionTime; t+=Time.deltaTime)
         {
-            activeSource.volume += (1 - (t / transitionTime));
+            musicSource.volume += (1 - (t / transitionTime));
             yield return null;
         }
 
-        activeSource.Stop();
-        activeSource.clip = newClip;
-        activeSource.Play();
+        musicSource.Stop();
+        musicSource.clip = newClip;
+        musicSource.Play();
 
         for (t = 0; t < transitionTime; t += Time.deltaTime)
         {
-            activeSource.volume += (t / transitionTime);
+            musicSource.volume += (t / transitionTime);
             yield return null;
         }
     }
 
     public void StopUpdateMusicWithFade()
     {
-        StopCoroutine("UpdateMusicWithFade");
+        if (updateMusicWithFade != null)
+        {
+            StopCoroutine(updateMusicWithFade);
+        }
     }
 
     public void PlaySFX(AudioClip clip)
@@ -130,7 +141,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip, float volume)
     {
-
         if (isSFXWorking)
         {
             sfxSource.PlayOneShot(clip, volume);
@@ -140,7 +150,6 @@ public class AudioManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         musicSource.volume = volume;
-        musicSource2.volume = volume;
     }
 
     public void SetSFXVolume(float volume)
