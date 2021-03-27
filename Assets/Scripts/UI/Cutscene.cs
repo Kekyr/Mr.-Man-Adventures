@@ -83,8 +83,8 @@ public class Cutscene : MonoBehaviour
         {
             if (currentPicture != sprites.Length)
             {
-                tutorialPicture1.spriteRenderer.sprite = sprites[currentPicture];
-                tutorialPicture2.spriteRenderer.sprite = sprites[currentPicture + 1];
+                tutorialPicture1.image.sprite = sprites[currentPicture];
+                tutorialPicture2.image.sprite = sprites[currentPicture + 1];
             }
             else
             {
@@ -103,7 +103,7 @@ public class Cutscene : MonoBehaviour
         {
             if (currentPicture != sprites.Length)
             {
-                cutscenePicture.spriteRenderer.sprite = sprites[currentPicture];
+                cutscenePicture.image.sprite = sprites[currentPicture];
             }
             else
             {

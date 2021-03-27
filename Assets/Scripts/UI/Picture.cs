@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Picture : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
+    public Image image;
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
     }
 }

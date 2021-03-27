@@ -86,8 +86,8 @@ public class TextLocalizer : MonoBehaviour
             ["introduction_4"] = "At once an orc came out of the bushes. " +
             "He was very glad to meet Twiggy...",
             ["introduction_5"] = "When Mr.Man returned to the tree, " +
-            "he came across a plate, on which Twiggy wrote that she was kidnapped " +
-            "by an evil orc.",
+            "he found a plate, it said \"I was kidnapped\".",
+
             ["introduction_6"] = "At first, he felt sad and hurt.",
             ["introduction_7"] = "But after some time, he perked up and " +
             "decided at all costs to save Twiggy.",

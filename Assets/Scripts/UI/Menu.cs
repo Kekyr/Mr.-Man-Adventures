@@ -20,12 +20,14 @@ public class Menu : MonoBehaviour
     private Common common;
 
     public bool startMenu;
-    private Vector3 newPosition = new Vector3(10, 650);
+    private Vector3 menuPosition = new Vector3(147, 710);
+    private Vector3 settingsPosition = new Vector3(147, 730);
     [SerializeField] private List<string> ids = new List<string>();
     [SerializeField] private int currentId;
 
     private void Start()
     {
+        
         audioManager = AudioManager.instance;
         gameManager = GameManager.instance;
         common = FindObjectOfType<Common>();
@@ -54,8 +56,8 @@ public class Menu : MonoBehaviour
 
     private void StartMenu()
     {
-        name.transform.localPosition = newPosition;
-
+        Debug.Log(name.transform.localPosition);
+        name.transform.localPosition = menuPosition;
 
         Common.ButtonSwitch(buttons, true);
 
@@ -87,6 +89,7 @@ public class Menu : MonoBehaviour
 
     public void Settings()
     {
+        name.transform.localPosition = settingsPosition;
         nameText.font = TextLocalizer.CurrentFont;
         nameText.text= TextLocalizer.ResolveStringValue("menu_settings");
         Common.ButtonSwitch(buttons, false);
@@ -101,6 +104,7 @@ public class Menu : MonoBehaviour
     public void Back()
     {
         nameText.font=english;
+        name.transform.localPosition = menuPosition;
         name.GetComponent<TextMeshProUGUI>().text = "Mr. Man Adventures";
         Common.SettingsButtonSwitch(settingsButtons, false);
         Common.ButtonSwitch(buttons, true);

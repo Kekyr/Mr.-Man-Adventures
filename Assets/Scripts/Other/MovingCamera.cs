@@ -24,7 +24,7 @@ public class MovingCamera : MonoBehaviour
             CameraNewPosition = target.TransformPoint(new Vector3(0, 0, -1));
             BackgroundNewPosition = target.TransformPoint(new Vector3(0, 0, 1));
 
-            BackgroundNewPosition.y = 3.54f;
+            BackgroundNewPosition.y = 4.06f;
             CameraNewPosition.y = 3.54f;
             BackgroundNewPosition.z = 3;
 
