@@ -25,6 +25,9 @@ TagManager:
   - Wall
   - CameraEnd
   - PlayerEnd
+  - Left Button
+  - Skip
+  - Text
   layers:
   - Default
   - TransparentFX

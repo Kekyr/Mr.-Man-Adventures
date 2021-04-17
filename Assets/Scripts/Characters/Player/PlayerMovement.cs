@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,12 +11,17 @@ public class PlayerMovement : MonoBehaviour
     public Collider2D purchaseCollider;
     private AudioManager audioManager;
     private CharacterController2D characterController;
+    private Button button;
+
+
 
     public float lastHorizontalMove = 0f;
     public float horizontalMove = 0f;
     private float runSpeed = 15f; //Скорость перемещения игрока
     private bool jump = false;
-    
+    private bool isButtonPressed = false;
+
+
     private void Start()
     {
         fistCollider.enabled = false;
@@ -28,15 +35,28 @@ public class PlayerMovement : MonoBehaviour
     //Считывание кнопок нажатых игроком
     private void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        #if UNITY_ANDROID
         
-        if (horizontalMove != 0)
+        if(isButtonPressed)
         {
-            lastHorizontalMove = horizontalMove;
+            if(button.CompareTag("Left Button"))
+            {
+                horizontalMove = -runSpeed;
+            }
+            else
+            {
+                horizontalMove = runSpeed;
+            }
         }
+        else
+        {
+            horizontalMove = 0f;
+        }
+
+        #else
         
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
@@ -65,6 +85,16 @@ public class PlayerMovement : MonoBehaviour
         {
             purchaseCollider.enabled = false;
         }
+       
+        #endif
+
+        if (horizontalMove != 0)
+        {
+            lastHorizontalMove = horizontalMove;
+        }
+        
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        
     }
 
     //Передвижение игрока
@@ -76,5 +106,75 @@ public class PlayerMovement : MonoBehaviour
             jump = false;
         }
     }
+
+    #if UNITY_ANDROID
+    
+    public void Jump()
+    {
+        jump = true;
+    }
+
+
+    public void Purchase()
+    {
+        purchaseCollider.enabled = true;
+        StartCoroutine(PurchaseDelay());
+        
+    }
+
+    private IEnumerator PurchaseDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        purchaseCollider.enabled = false;
+    }
+
+
+    public void onPointerUpPunchButton()
+    {
+        fistCollider.enabled = false;
+        animator.SetBool("IsPunching", false);
+
+    }
+
+    public void onPointerDownPunchButton()
+    {
+        if (characterController.grounded)
+        {
+            audioManager.PlaySFX(punchSFX, 1.5f);
+
+            fistCollider.enabled = true;
+            animator.SetBool("IsPunching", true);
+
+
+        }
+    }
+
+    public void onPointerUpRunButton(Button key)
+    {
+        button = key;
+        isButtonPressed = false;
+    }
+
+    public void onPointerDownRunButton(Button key)
+    {
+        button = key;
+        isButtonPressed = true;
+    }
+
+    public void onPointerUpJumpButton()
+    {
+        jump = false;
+
+    }
+
+    public void onPointerDownJumpButton()
+    {
+        jump = true;
+
+    }
+
+
+
+#endif
 
 }

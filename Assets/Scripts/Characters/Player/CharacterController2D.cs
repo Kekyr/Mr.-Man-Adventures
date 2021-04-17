@@ -26,6 +26,11 @@ public class CharacterController2D : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         common = FindObjectOfType<Common>();
+       
+    }
+
+    private void Start()
+    {
         audioManager = AudioManager.instance;
     }
 

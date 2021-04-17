@@ -1,26 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class PlayerHealth : MonoBehaviour
 {
+   
+    private static int countOfDeath;
+
+    public GameObject rewardedAd;
+    public List<Heart> hearts = new List<Heart>();
 
     public AudioClip deathSFX;
     public AudioClip hurtSFX;
+    public AudioClip healSFX;
     private Animator animator;
     private Rigidbody2D rigidBody2D;
     private AudioManager audioManager;
-    public List<Heart> hearts = new List<Heart>();
+    private PlayerMovement playerMovement;
+    
 
     public int healthPoints = 3; //Очки здоровья игрока
     public bool falling = false;
+    
     private bool damaging = false;
-    private Vector2 lastJump = new Vector2(0, 0.07f);//Сила с которой игрок полетит вверх после смерти
+    private bool isFirstTime = true;
+    private Vector2 lastJump = new Vector2(0, 0.10f);//Сила с которой игрок полетит вверх после смерти
+    
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
         audioManager = AudioManager.instance;
     }
 
@@ -32,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
             damaging = true;
             hearts[healthPoints - 1].ChangeSprite();
             healthPoints -= 1;
+            
             audioManager.PlaySFX(hurtSFX);
             if (healthPoints <= 0)
             {
@@ -44,7 +57,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 StartCoroutine(TemporaryImmortality());
             }
+
             
+
         }
     }
 
@@ -59,6 +74,18 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("IsHurt", false);
         damaging = false;
         falling = false;
+
+        if (healthPoints == 1 && isFirstTime)
+        {
+            Time.timeScale = 0f;
+            playerMovement.enabled = false;
+            PauseMenu.gameIsPaused = true;
+            RewardedAdsButton.isRewardedAdOn = true;
+            rewardedAd.SetActive(true);
+            isFirstTime = false;
+        }
+
+
     }
 
     //Уничтожение игрока при очках здоровья равных нулю
@@ -79,7 +106,28 @@ public class PlayerHealth : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 12, true);
         Physics2D.IgnoreLayerCollision(8, 0, true);
         yield return new WaitForSeconds(3);
+        countOfDeath++;
+        if(countOfDeath %5==0)
+        {
+            ShowInterstitialAd();
+        }
         Common.LoadNextScene();
     }
+
+    public void ShowInterstitialAd()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show();
+        }
+        else
+        {
+            Debug.Log("Interstitial ad not ready at the moment! Please try again later!");
+        }
+    }
+
+   
+
+    
 
 }

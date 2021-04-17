@@ -20,7 +20,14 @@ public class Ending : MonoBehaviour
 
             text.font = TextLocalizer.CurrentFont;
 
-            text.fontSize = TextLocalizer.CurrentFontSize;
+            if (TextLocalizer.CurrentLanguage == "russian")
+            {
+                text.fontSize = TextLocalizer.CurrentFontSize+5;
+            }
+            else
+            {
+                text.fontSize = TextLocalizer.CurrentFontSize;
+            }
 
             text.text = TextLocalizer.ResolveStringValue("menu_" + text.text);
 

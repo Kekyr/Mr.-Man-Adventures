@@ -476,8 +476,8 @@ GameObject:
   m_Component:
   - component: {fileID: 341098159}
   - component: {fileID: 341098158}
-  - component: {fileID: 341098157}
   - component: {fileID: 341098160}
+  - component: {fileID: 341098157}
   m_Layer: 0
   m_Name: Label
   m_TagString: Untagged
@@ -495,7 +495,7 @@ Animator:
   m_GameObject: {fileID: 341098156}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 12d64fcf0b2b5fa42bb4765fff8bcc7c, type: 2}
+  m_Controller: {fileID: 9100000, guid: e8c078e0dc225e64aa9fa9b6dd13f28f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -543,7 +543,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5287438269411145907, guid: e2bb2a567edbb66469cee5984043b772,
+  m_Sprite: {fileID: -7875411195293316046, guid: 8127380e4cea915408f7a09a0cd38e6e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ce1401b6df8df4ea940c433afe19ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &424450375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 922616506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d8f46943dc3844696f6137cce1ac70, type: 3}
+  m_Script: {fileID: 11500000, guid: 835ca217882b09f4fb7cb024a9ec7e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   on: {fileID: -1786947307054975619, guid: d6ae156c040afd340b0a2604fe3b71bd, type: 3}
@@ -2473,7 +2474,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1797525556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d8f46943dc3844696f6137cce1ac70, type: 3}
+  m_Script: {fileID: 11500000, guid: c0123b26e44bcd446996ac4e258ecb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   on: {fileID: -1786947307054975619, guid: d6ae156c040afd340b0a2604fe3b71bd, type: 3}

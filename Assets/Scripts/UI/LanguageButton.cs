@@ -11,6 +11,23 @@ public class LanguageButton : MonoBehaviour
     public Sprite english;
     private Image image;
 
+
+    private void Awake()
+    {
+        if (PlayerPrefs.GetString("Language") != "")
+        {
+            if (PlayerPrefs.GetString("Language") == "russian")
+            {
+                languageIsRussian = true;
+            }
+            else
+            {
+                languageIsRussian = false;
+            }
+        }
+    }
+
+
     private void Start()
     {
         image = GetComponent<Image>();     
@@ -32,12 +49,13 @@ public class LanguageButton : MonoBehaviour
             image.sprite = english;
 
             TextLocalizer.CurrentLanguage = "english";
+            PlayerPrefs.SetString("Language", TextLocalizer.CurrentLanguage);
 
-            if(SceneManager.GetActiveScene().buildIndex == 0)
+            if (SceneManager.GetActiveScene().name=="Menu")
             {
                 Menu.changeLanguage = true;
             }
-            else if(SceneManager.GetActiveScene().buildIndex==3)
+            else if(SceneManager.GetActiveScene().name=="Level 1")
             {
                 PauseMenu.changeLanguage = true;
             }
@@ -51,19 +69,20 @@ public class LanguageButton : MonoBehaviour
             image.sprite = russian;
 
             TextLocalizer.CurrentLanguage = "russian";
+            PlayerPrefs.SetString("Language", TextLocalizer.CurrentLanguage);
 
-            if (SceneManager.GetActiveScene().buildIndex == 0)
+            if (SceneManager.GetActiveScene().name == "Menu")
             {
                 Menu.changeLanguage = true;
             }
-            else if (SceneManager.GetActiveScene().buildIndex == 3)
+            else if (SceneManager.GetActiveScene().name == "Level 1")
             {
                 PauseMenu.changeLanguage = true;
             }
 
             languageIsRussian = true;
             
-            if (SceneManager.GetActiveScene().buildIndex >= 3)
+            if (SceneManager.GetActiveScene().name!="Menu" && SceneManager.GetActiveScene().name != "Introduction" && SceneManager.GetActiveScene().name != "Tutorial")
             {
                 TextLocalizer.CurrentFontSize = 73;
             }

@@ -7,7 +7,7 @@ public class Heart : MonoBehaviour
     public Texture2D dead;
     private RawImage rawImage;
 
-    private bool isAlive = false;
+    private bool isDead = false;
 
     private void Start()
     {
@@ -17,14 +17,18 @@ public class Heart : MonoBehaviour
     //Смена спрайта при потере одной жизни
     public void ChangeSprite()
     {
-        if (!isAlive)
+        if (!isDead)
         {
             rawImage.texture = dead;
-            isAlive = true;
+            isDead = true;
         }
         else
         {
-            rawImage.texture = alive;
+            if (rawImage != null)
+            {
+                rawImage.texture = alive;
+            }
+            isDead = false;
         }
     }
 }

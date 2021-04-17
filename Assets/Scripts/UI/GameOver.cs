@@ -19,7 +19,6 @@ public class GameOver : MonoBehaviour
         {
             text = buttons[i].GetComponentInChildren<TextMeshProUGUI>();
 
-            //Debug.Log("text:" + text.text);
 
             text.font = TextLocalizer.CurrentFont;
             
@@ -41,7 +40,6 @@ public class GameOver : MonoBehaviour
                 text.fontSize = TextLocalizer.CurrentFontSize;
             }
 
-            //Debug.Log("id:" + "menu_" + text.text);
             text.text = TextLocalizer.ResolveStringValue("menu_" + text.text);
 
         }

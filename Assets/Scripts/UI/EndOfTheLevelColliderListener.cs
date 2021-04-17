@@ -40,7 +40,7 @@ public class EndOfTheLevelColliderListener : MonoBehaviour
             {
                 audioManager.StopMusic();
                 audioManager.StopUpdateMusicWithFade();
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene("Ending");
             }
         }
     }

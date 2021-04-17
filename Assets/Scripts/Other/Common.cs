@@ -57,7 +57,7 @@ public class Common : MonoBehaviour
 	public static void MainMenu()
 	{
 		Menu.fromGame = true;
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene(1);
 	}
 
 	public void ChangeText(GameObject[] buttons, bool changeLanguage, List<string> ids)
@@ -83,10 +83,19 @@ public class Common : MonoBehaviour
 			{
 				text.text = TextLocalizer.ResolveStringValue("menu_" + ids[currentId]);
 				currentId++;
-
-				if (currentId == ids.Count)
+				if (SceneManager.GetActiveScene().name == "Level 1")
 				{
-					currentId = 0;
+					if (currentId == ids.Count - 1)
+					{
+						currentId = 0;
+					}
+				}
+				else
+				{
+					if (currentId == ids.Count)
+					{
+						currentId = 0;
+					}
 				}
 			}
 		}

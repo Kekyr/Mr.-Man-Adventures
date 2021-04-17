@@ -1,11 +1,14 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Cutscene : MonoBehaviour
 {
     public Sprite[] sprites;
-    private TextMeshProUGUI text;
+    public GameObject skip;
+    private TextMeshProUGUI text1;
+    private TextMeshProUGUI text2;
     private Picture[] pictures;
     private Picture tutorialPicture1;
     private Picture tutorialPicture2;
@@ -17,7 +20,7 @@ public class Cutscene : MonoBehaviour
 
     private void Awake()
     {
-        text = FindObjectOfType<TextMeshProUGUI>();
+        text1 = GameObject.FindGameObjectWithTag("Text").GetComponent<TextMeshProUGUI>();
         pictures = FindObjectsOfType<Picture>();
 
         foreach (var picture in pictures)
@@ -36,27 +39,46 @@ public class Cutscene : MonoBehaviour
             }
         }
 
-        text.font = TextLocalizer.CurrentFont;
+        if(PlayerPrefs.GetInt("Introduction")==1)
+        {
+            skip.SetActive(true);
+            text2=skip.GetComponentInChildren<TextMeshProUGUI>();
+            text2.font=TextLocalizer.CurrentFont;
+
+            if (TextLocalizer.CurrentLanguage == "russian")
+            {
+                text2.fontSize = TextLocalizer.CurrentFontSize - 30;
+            }
+            else
+            {
+                text2.fontSize = TextLocalizer.CurrentFontSize - 40;
+            }
+
+            text2.text = TextLocalizer.ResolveStringValue("skip");
+
+        }
+
+        text1.font = TextLocalizer.CurrentFont;
 
         if (TextLocalizer.CurrentLanguage == "russian")
         {
-            text.fontSize = TextLocalizer.CurrentFontSize - 30;
+            text1.fontSize = TextLocalizer.CurrentFontSize - 30;
         }
         else
         {
-            text.fontSize = TextLocalizer.CurrentFontSize-40;
+            text1.fontSize = TextLocalizer.CurrentFontSize-40;
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().name=="Introduction")
         {
             for (var i = 0; i < introductionTexts.Length; i++)
             {
                 introductionTexts[i] = TextLocalizer.ResolveStringValue("introduction_" + i);
             }
 
-            text.text = introductionTexts[0];
+            text1.text = introductionTexts[0];
         }
-        else if(SceneManager.GetActiveScene().buildIndex == 2)
+        else if(SceneManager.GetActiveScene().name =="Tutorial")
         {
             currentPicture = 2;
             for (var i = 0; i < tutorialTexts.Length; i++)
@@ -64,7 +86,7 @@ public class Cutscene : MonoBehaviour
                 tutorialTexts[i] = TextLocalizer.ResolveStringValue("tutorial_" + i);
             }
 
-            text.text = tutorialTexts[0];
+            text1.text = tutorialTexts[0];
         }
 
     }
@@ -93,7 +115,7 @@ public class Cutscene : MonoBehaviour
 
             if (currentText != tutorialTexts.Length)
             {
-                text.text = tutorialTexts[currentText];
+                text1.text = tutorialTexts[currentText];
             }
 
             currentPicture += 2;
@@ -107,12 +129,13 @@ public class Cutscene : MonoBehaviour
             }
             else
             {
+                PlayerPrefs.SetInt("Introduction", 1);
                 LoadNextScene();
             }
 
             if (currentText != introductionTexts.Length)
             {
-                text.text = introductionTexts[currentText];
+                text1.text = introductionTexts[currentText];
             }
 
             currentPicture++;
@@ -120,8 +143,9 @@ public class Cutscene : MonoBehaviour
         }
     }
 
-    private void LoadNextScene()
+    public void LoadNextScene()
     {
         Common.LoadNextScene();
     }
+
 }

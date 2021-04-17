@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,11 +10,12 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public static bool changeLanguage;
 
+
+    public TextMeshProUGUI rewardedAdText;
     private GameObject[] settingsButtons;
     [SerializeField] private GameObject[] buttons;
     private AudioManager audioManager;
     private GameManager gameManager;
-    private TextMeshProUGUI text;
     private Common common;
     private PlayerMovement playerMovement;
     
@@ -21,7 +23,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private int currentId;
     private string id;
     private bool settingsIsClosed = true;
-
 
     private void Start()
     {
@@ -34,6 +35,8 @@ public class PauseMenu : MonoBehaviour
 
         common.ChangeText(buttons,changeLanguage,ids);
         common.ChangeText(settingsButtons, changeLanguage, ids);
+        ChangeRewardedAdText();
+
     }
 
     
@@ -67,9 +70,12 @@ public class PauseMenu : MonoBehaviour
 }
     private void ChangeLanguage()
     {
+
         common.ChangeText(buttons, changeLanguage, ids);
 
         common.ChangeText(settingsButtons, changeLanguage, ids);
+
+        ChangeRewardedAdText();
 
         changeLanguage = false;
     }
@@ -77,10 +83,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        Common.ButtonSwitch(buttons,true);
-        Time.timeScale = 0f;
-        playerMovement.enabled = false;
-        gameIsPaused = true;
+        if (!RewardedAdsButton.isRewardedAdOn)
+        {
+            Common.ButtonSwitch(buttons, true);
+            Time.timeScale = 0f;
+            playerMovement.enabled = false;
+            gameIsPaused = true;
+        }
     }
 
     public void Resume()
@@ -117,11 +126,14 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartLevel()
     {
-        Physics2D.IgnoreLayerCollision(8, 9, false);
-        Physics2D.IgnoreLayerCollision(8, 11, false);
-        Physics2D.IgnoreLayerCollision(8, 12, false);
-        Physics2D.IgnoreLayerCollision(8, 0, false);
-        LoadCurrentScene();
+        if (!RewardedAdsButton.isRewardedAdOn)
+        {
+            Physics2D.IgnoreLayerCollision(8, 9, false);
+            Physics2D.IgnoreLayerCollision(8, 11, false);
+            Physics2D.IgnoreLayerCollision(8, 12, false);
+            Physics2D.IgnoreLayerCollision(8, 0, false);
+            LoadCurrentScene();
+        }
     }
 
     private void LoadCurrentScene()
@@ -134,8 +146,33 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    
+    private void ChangeRewardedAdText()
+    {
+        if (!changeLanguage)
+        {
+            ids.Add(rewardedAdText.text);
+        }
 
-    
+        rewardedAdText.font = TextLocalizer.CurrentFont;
+
+        if (TextLocalizer.CurrentLanguage == "english")
+        {
+            rewardedAdText.fontSize = TextLocalizer.CurrentFontSize - 30;
+        }
+        else
+        {
+            rewardedAdText.fontSize = TextLocalizer.CurrentFontSize;
+        }
+
+        if (!changeLanguage)
+        {
+            rewardedAdText.text = TextLocalizer.ResolveStringValue(rewardedAdText.text);
+        }
+        else
+        {
+            rewardedAdText.text = TextLocalizer.ResolveStringValue(ids[ids.Count-1]);
+
+        }
+    }
 
 }

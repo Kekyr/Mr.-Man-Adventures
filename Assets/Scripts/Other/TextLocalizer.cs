@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TextLocalizer : MonoBehaviour
 {
-    public static string CurrentLanguage = "english";//язык по дефолту- английский
+    public static string CurrentLanguage="english";
 
     public static TMP_FontAsset CurrentFont;
 
@@ -36,7 +36,8 @@ public class TextLocalizer : MonoBehaviour
             ["menu_ending"] = "Поздравляю! Ты сделал это! Судя по всему ты ас в играх." +
             " Буду очень благодарен за отзыв! И спасибо за игру!",
 
-
+            ["skip"] = "Пропустить",
+            ["rewardedad"]="Ты проигрываешь!",
 
             ["introduction_0"] = "Это был самый обычный день. Mr.Man и " +
             "Twiggy просто стояли у дерева и болтали.",
@@ -76,6 +77,9 @@ public class TextLocalizer : MonoBehaviour
             ["menu_ending"] = "Congratulations! You did this! You are a true hardcore gamer." +
             " Besides,thank you for playing! I will appreciate any feedback.",
 
+            ["skip"] = "skip",
+            ["rewardedad"] = "You are about to lose!",
+
             ["introduction_0"] = "It was a usual day. Mr.Man and Twiggy were walking in " +
             "the forest and talking.",
             ["introduction_1"] = "Suddenly Mr. Man felt some delicious smell " +
@@ -102,6 +106,11 @@ public class TextLocalizer : MonoBehaviour
 
     private void Awake()
     {
+        if (PlayerPrefs.GetString("Language") != "")
+        {
+            CurrentLanguage = PlayerPrefs.GetString("Language");
+        }
+
         CheckFont();
     }
 
@@ -110,13 +119,13 @@ public class TextLocalizer : MonoBehaviour
         return Translations[CurrentLanguage][id];
     }
 
-    private void CheckFont()
+    public void CheckFont()
     {
         if (TextLocalizer.CurrentLanguage == "russian")
         {
             CurrentFont = russian;
 
-            if (SceneManager.GetActiveScene().buildIndex >= 3)
+            if (SceneManager.GetActiveScene().name != "Menu" && SceneManager.GetActiveScene().name != "Introduction" && SceneManager.GetActiveScene().name != "Tutorial")
             {
                 TextLocalizer.CurrentFontSize = 73;
             }
@@ -132,6 +141,7 @@ public class TextLocalizer : MonoBehaviour
             TextLocalizer.CurrentFontSize = 120;
         }
     }
+
 
 
 }

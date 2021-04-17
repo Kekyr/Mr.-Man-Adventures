@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
+
     [SerializeField] private GameObject nearBlock;
     [SerializeField] private LayerMask blocks;
     private GameObject player;
@@ -51,9 +52,10 @@ public class Floor : MonoBehaviour
             }
             newPosition.x += offset;
             newPosition.y = 3;
-            tiles = Physics2D.OverlapCircleAll(newPosition, 1.5f, blocks);
+            tiles = Physics2D.OverlapCircleAll(newPosition, 4.5f, blocks);
             FindTile();
             StartCoroutine(Delay());
+            
         }
     }
 
@@ -65,7 +67,6 @@ public class Floor : MonoBehaviour
         playerMovement.enabled = false;
         yield return new WaitForSeconds(1f);
         playerSprite.enabled = true;
-        Debug.Log("Floor damage");
         playerMovement.enabled = true;
     }
 
@@ -88,6 +89,8 @@ public class Floor : MonoBehaviour
         }
 
         newPosition.x = nearBlock.transform.position.x;
+
+        
     }
 
 
